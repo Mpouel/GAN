@@ -7,15 +7,22 @@ html body {
 }
 
 .cube-view {
-    width: 60%;
-    height: 60%;
+    width: 90%;
+    height: 90%;
     position: fixed;
     overflow: hidden;
+    left: 50%;
+    transform: translate(-50%);
 }
 
 .mac {
     position: fixed;
-    top: 60%;
+    bottom: 0px;
+    right: 0px;
+}
+
+#mac {
+    display:none;
 }
 
 #titanic {
