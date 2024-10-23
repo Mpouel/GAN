@@ -24,10 +24,47 @@ document.getElementById('cube-view').onload = function () {
             // Push the logs to the array
             logs.push(args);
             if (args[1] != undefined) {
-                if (args[1] != ) {
-
+                if (args[1].type == "MOVE") {
+                    console.log(args[1].move)
+                     var lol = 1
+                    // switch to get the correct move to send to the ev3
+                    switch(args[1].move) {
+                        case "R":
+                            clr_r()
+                            break;
+                        case "R'":
+                            clr_rp()
+                            break;
+                        case "F":
+                            clr_f()
+                            break;
+                        case "F'":
+                            clr_fp()
+                            break;
+                        case "L":
+                            clr_l()
+                            break;
+                        case "L'":
+                            clr_lp()
+                            break;
+                        case "B":
+                            clr_b()
+                            break;
+                        case "B'":
+                            clr_bp()
+                            break;
+                        case "D":
+                            clr_d()
+                            break;
+                        case "D'":
+                            clr_dp()
+                            break
+                        default:
+                            lol = 0
+                    }
+                    if (lol == 1) {setTimeout(clr_reset, 2000)}
+                    else {console.log("LOL = :(")}
                 }
-                console.log(args[1])
             }
         };
 
@@ -58,10 +95,6 @@ function clr_rp() {
     clrn.style.background = "red" // Right
     clrm.style.background = "blue" // Modifier (prime ')
 }
-function clr_r2() {
-    clrn.style.background = "red" // Right
-    clrm.style.background = "green" // Modifier (2)
-}
 //======================================================
 function clr_f() {
     clrn.style.background = "blue"; // Front
@@ -70,10 +103,6 @@ function clr_f() {
 function clr_fp() {
     clrn.style.background = "blue" // Front
     clrm.style.background = "blue" // Modifier (prime ')
-}
-function clr_f2() {
-    clrn.style.background = "blue" // Front
-    clrm.style.background = "green" // Modifier (2)
 }
 //======================================================
 function clr_l() {
@@ -84,10 +113,6 @@ function clr_lp() {
     clrn.style.background = "green" // Left
     clrm.style.background = "blue" // Modifier (prime ')
 }
-function clr_l2() {
-    clrn.style.background = "green" // Left
-    clrm.style.background = "green" // Modifier (2)
-}
 //====================================================
 function clr_b() {
     clrn.style.background = "yellow"; // Back
@@ -97,10 +122,6 @@ function clr_bp() {
     clrn.style.background = "yellow" // Back
     clrm.style.background = "blue" // Modifier (prime ')
 }
-function clr_b2() {
-    clrn.style.background = "yellow" // Back
-    clrm.style.background = "green" // Modifier (2)
-}
 //====================================================
 function clr_d() {
     clrn.style.background = "pink"; // Down
@@ -109,8 +130,4 @@ function clr_d() {
 function clr_dp() {
     clrn.style.background = "pink" // Down
     clrm.style.background = "blue" // Modifier (prime ')
-}
-function clr_d2() {
-    clrn.style.background = "pink" // Down
-    clrm.style.background = "green" // Modifier (2)
 }
