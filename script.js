@@ -39,3 +39,61 @@ document.getElementById('cube-view').onload = function () {
         }, 5000);
     }
 };
+
+function clr_r() {
+    const clrn = document.getElementById("clr-n")
+    const clrm = document.getElementById("clr-m")
+    clrn.style.background = "red"; // Right
+    clrm.style.background = "red"; // No modifier
+}
+function clr_rp() {
+    const clrn = document.getElementById("clr-n")
+    const clrm = document.getElementById("clr-m")
+    clrn.style.background = "red" // Right
+    clrm.style.background = "blue" // Modifier (prime ')
+}
+function clr_r2() {
+    const clrn = document.getElementById("clr-n")
+    const clrm = document.getElementById("clr-m")
+    clrn.style.background = "red" // Right
+    clrm.style.background = "green" // Modifier (2)
+}
+//======================================================
+function clr_f() {
+    const clrn = document.getElementById("clr-n")
+    const clrm = document.getElementById("clr-m")
+    clrn.style.background = "blue"; // Front
+    clrm.style.background = "red"; // No modifier
+}
+function clr_fp() {
+    const clrn = document.getElementById("clr-n")
+    const clrm = document.getElementById("clr-m")
+    clrn.style.background = "blue" // Front
+    clrm.style.background = "blue" // Modifier (prime ')
+}
+function clr_f2() {
+    const clrn = document.getElementById("clr-n")
+    const clrm = document.getElementById("clr-m")
+    clrn.style.background = "blue" // Front
+    clrm.style.background = "green" // Modifier (2)
+}
+//======================================================
+function clr_l() {
+    const clrn = document.getElementById("clr-n")
+    const clrm = document.getElementById("clr-m")
+    clrn.style.background = "green"; // Left allo ??????
+    clrm.style.background = "red"; // No modifier
+}
+function clr_lp() {
+    const clrn = document.getElementById("clr-n")
+    const clrm = document.getElementById("clr-m")
+    clrn.style.background = "green" // Left
+    clrm.style.background = "blue" // Modifier (prime ')
+}
+function clr_l2() {
+    const clrn = document.getElementById("clr-n")
+    const clrm = document.getElementById("clr-m")
+    clrn.style.background = "green" // Left
+    clrm.style.background = "green" // Modifier (2)
+}
+//====================================================
