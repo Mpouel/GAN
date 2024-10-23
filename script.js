@@ -134,4 +134,28 @@ function clr_d2() {
 
 
 
-// ba
+// batterie code
+function batterieChangeValue(selector, value) {
+    document
+      .querySelector(selector)
+      .style.setProperty("--middle", String(100 - value) + "%");
+    document
+      .querySelector(selector)
+      .style.setProperty(
+        "--middle",
+        document.querySelector(selector).style.getPropertyValue("--middle")
+      );
+    document.querySelector(selector).dataset.charge = String(value) + "%";
+  }
+  function batterieChargeState(selector, value) {
+    if (value) {
+      document
+        .querySelector(selector)
+        .style.setProperty("--visbility", "visible");
+    } else {
+      document.querySelector(selector).style.setProperty("--visbility", "hidden");
+    }
+  }
+  
+batterieChangeValue(".cssBatterie", 100);
+batterieChargeState(".cssBatterie", true);
