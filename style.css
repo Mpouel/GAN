@@ -1,7 +1,7 @@
 html body {
     width: 100vw;
     height: 100vh;
-    background-color: white;
+    background-color: black !important;
     margin: 0px;
     padding: 0px;
 }
@@ -10,10 +10,14 @@ html body {
     width: 50%;
     height: 50%;
     position: fixed;
-    overflow: visible;
+    overflow: hidden;
 }
 
 .mac {
     position: fixed;
-    top: 320px;
+    top: 60%;
+}
+
+#titanic {
+    float: none !important;
 }
