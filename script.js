@@ -23,9 +23,6 @@ document.getElementById('cube-view').onload = function () {
         iframeWindow.console.log = function (...args) {
             // Push the logs to the array
             logs.push(args);
-
-            // Call the original console.log to still output logs to the console
-            originalLog.apply(iframeWindow.console, args);
         };
 
         // Function to get the captured logs
@@ -134,3 +131,7 @@ function clr_d2() {
     clrn.style.background = "pink" // Down
     clrm.style.background = "green" // Modifier (2)
 }
+
+
+
+// ba

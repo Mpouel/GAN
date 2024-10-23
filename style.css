@@ -28,3 +28,75 @@ html body {
 #titanic {
     float: none;
 }
+
+.cssBatterie {
+    width: 92px;
+    height: calc(28px + 160px);
+    --height: calc(100% - 24px);
+    --width: calc(100% - 12px);
+    --background: white;
+    --visbility: hidden;
+    --backgroundEnd: green;
+    --oldmiddle: 0%;
+    --middle: 0%;
+    --border: black;
+    padding-top: 1rem;
+    overflow: hidden;
+  }
+  .cssBatterie:after {
+    position: relative;
+    content: "100%";
+    top: calc(0px - (var(--height)) * 2 + 30px - 0.5rem);
+    content: attr(data-charge);
+    color: black;
+    font-size: 1.5rem;
+    font-family: arial, sans-serif;
+    font-weight: bold;
+    left: calc((var(--width) - 12px - 0.5rem) / 2);
+  }
+  
+  .cssBatterie .top {
+    position: relative;
+    background: black;
+    border-radius: 10px;
+    width: 30px;
+    bottom: -5px;
+    left: 50%;
+    transform: translate(-50%, 0px);
+    height: 12px;
+  }
+  
+  .cssBatterie .middle {
+    width: var(--width);
+    height: var(--height);
+    border-radius: 10px;
+    background: linear-gradient(
+        180deg,
+        var(--background) calc(var(--middle) - 5px),
+        var(--backgroundEnd) calc(var(--middle) + 5px)
+      ),
+      linear-gradient(to bottom, var(--border) 100%, var(--border) 100%),
+      var(--border);
+    background-clip: content-box, border-box, border-box, border-box;
+    background-origin: content-box, border-box, border-box, border-box;
+    display: inline-block;
+    padding: 0px;
+    border-radius: 20px;
+    border: solid 6px transparent;
+  }
+  
+  .cssBatterie .charging {
+    width: auto;
+    position: relative;
+    top: calc(0px - var(--height) / 2);
+    left: 50%;
+    transform: translate(-2.5rem, -50%);
+    font-size: 5rem;
+    color: #ffffff00;
+    background: black;
+    background: radial-gradient(circle, red, yellow);
+    -webkit-background-clip: text;
+    background-clip: text;
+    visibility: var(--visbility);
+  }
+  

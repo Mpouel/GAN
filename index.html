@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAN Cube viewer</title>
+    <title>Cubic rub</title>
     <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <iframe src="gan/" frameborder="0" class="cube-view" id="cube-view" allow="bluetooth"></iframe>
@@ -15,6 +16,15 @@
     </p>
     <div id="ctr-n"></div>
     <div id="ctr-m"></div>
+    <div class='cssBatterie' data-charge='100%'>
+        <div class='top'>
+        </div>
+        <div class='middle'>
+        </div>
+        <div class='charging'>
+          <i class='bx bxs-bolt'></i>
+        </div>
+      </div>
     <script src="script.js"></script>
 </body>
 </html>
