@@ -23,8 +23,10 @@ document.getElementById('cube-view').onload = function () {
         iframeWindow.console.log = function (...args) {
             // Push the logs to the array
             logs.push(args);
-            console.log(args)
             if (args[1] != undefined) {
+                if (args[1] != ) {
+
+                }
                 console.log(args[1])
             }
         };
