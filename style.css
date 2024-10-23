@@ -7,8 +7,8 @@ html body {
 }
 
 .cube-view {
-    width: 50%;
-    height: 50%;
+    width: 60%;
+    height: 60%;
     position: fixed;
     overflow: hidden;
 }

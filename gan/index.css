@@ -20,18 +20,21 @@ body {
 }
 
 .controls {
-    margin-left: .5em
+    display: flex;
+    justify-content: center;
 }
 
 .controls button {
+    font-family: Arial, Helvetica, sans-serif;
     color: #fff;
     background-color: #333;
-    border: 1px solid silver;
+    border: none;
     margin: .1em;
     padding: .5em 1em;
     font-weight: 700;
     cursor: pointer;
-    border-radius: 1em
+    border-radius: 1em;
+    font-size: 1rem;
 }
 
 .info {
@@ -85,9 +88,9 @@ body {
 }
 
 .help {
-    color: #ffffff80;
+    color: white;
+    text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    width: 20rem;
-    font-size: .8em;
-    margin-top: .5em
+    width: 100%;
+    font-size: 2rem;
 }
