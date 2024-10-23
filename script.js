@@ -194,7 +194,7 @@ function checkOnlineStatus(callback) {
 betterFetch('script.js', (data) => {
     window.data1 = data
     setInterval(() => {
-        checkFileContent('game.js', window.data1, (data) => {
+        checkFileContent('script.js', window.data1, (data) => {
             if (!navigator.onLine) {
                 return
             }
