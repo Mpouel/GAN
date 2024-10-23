@@ -28,7 +28,9 @@ document.getElementById('cube-view').onload = function () {
 
         // Function to get the captured logs
         function getIframeLogs() {
-            return logs;
+            var logs1 = logs
+            var logs = []
+            return logs1;
         }
 
         // Example usage: Print logs after 5 seconds
