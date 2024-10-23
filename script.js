@@ -23,6 +23,7 @@ document.getElementById('cube-view').onload = function () {
         iframeWindow.console.log = function (...args) {
             // Push the logs to the array
             logs.push(args);
+            console.log(args[0].type)
         };
 
         // Function to get the captured logs
@@ -37,125 +38,74 @@ document.getElementById('cube-view').onload = function () {
     }
 };
 
+const clrn = document.getElementById("clr-n") // Color for the name of the move
+const clrm = document.getElementById("clr-m") // Color for the modifier
+
+function clr_reset() {
+    clrn.style.background = "black"; // No move
+    clrm.style.background = "black"; // No modifier
+}
 function clr_r() {
-    const clrn = document.getElementById("clr-n") // Color for the name of the move
-    const clrm = document.getElementById("clr-m") // Color for the modifier
     clrn.style.background = "red"; // Right
     clrm.style.background = "red"; // No modifier
 }
 function clr_rp() {
-    const clrn = document.getElementById("clr-n") // Color for the name of the move
-    const clrm = document.getElementById("clr-m") // Color for the modifier
     clrn.style.background = "red" // Right
     clrm.style.background = "blue" // Modifier (prime ')
 }
 function clr_r2() {
-    const clrn = document.getElementById("clr-n") // Color for the name of the move
-    const clrm = document.getElementById("clr-m") // Color for the modifier
     clrn.style.background = "red" // Right
     clrm.style.background = "green" // Modifier (2)
 }
 //======================================================
 function clr_f() {
-    const clrn = document.getElementById("clr-n") // Color for the name of the move
-    const clrm = document.getElementById("clr-m") // Color for the modifier
     clrn.style.background = "blue"; // Front
     clrm.style.background = "red"; // No modifier
 }
 function clr_fp() {
-    const clrn = document.getElementById("clr-n") // Color for the name of the move 
-    const clrm = document.getElementById("clr-m") // Color for the modifier
     clrn.style.background = "blue" // Front
     clrm.style.background = "blue" // Modifier (prime ')
 }
 function clr_f2() {
-    const clrn = document.getElementById("clr-n") // Color for the name of the move 
-    const clrm = document.getElementById("clr-m") // Color for the modifier
     clrn.style.background = "blue" // Front
     clrm.style.background = "green" // Modifier (2)
 }
 //======================================================
 function clr_l() {
-    const clrn = document.getElementById("clr-n") // Color for the name of the move
-    const clrm = document.getElementById("clr-m") // Color for the modifier
     clrn.style.background = "green"; // Left
     clrm.style.background = "red"; // No modifier
 }
 function clr_lp() {
-    const clrn = document.getElementById("clr-n") // Color for the name of the move
-    const clrm = document.getElementById("clr-m") // Color for the modifier
     clrn.style.background = "green" // Left
     clrm.style.background = "blue" // Modifier (prime ')
 }
 function clr_l2() {
-    const clrn = document.getElementById("clr-n") // Color for the name of the move
-    const clrm = document.getElementById("clr-m") // Color for the modifier
     clrn.style.background = "green" // Left
     clrm.style.background = "green" // Modifier (2)
 }
 //====================================================
 function clr_b() {
-    const clrn = document.getElementById("clr-n") // Color for the name of the move
-    const clrm = document.getElementById("clr-m") // Color for the modifier
     clrn.style.background = "yellow"; // Back
     clrm.style.background = "red"; // No modifier
 }
 function clr_bp() {
-    const clrn = document.getElementById("clr-n") // Color for the name of the move
-    const clrm = document.getElementById("clr-m") // Color for the modifier
     clrn.style.background = "yellow" // Back
     clrm.style.background = "blue" // Modifier (prime ')
 }
 function clr_b2() {
-    const clrn = document.getElementById("clr-n") // Color for the name of the move
-    const clrm = document.getElementById("clr-m") // Color for the modifier
     clrn.style.background = "yellow" // Back
     clrm.style.background = "green" // Modifier (2)
 }
 //====================================================
 function clr_d() {
-    const clrn = document.getElementById("clr-n") // Color for the name of the move
-    const clrm = document.getElementById("clr-m") // Color for the modifier
     clrn.style.background = "pink"; // Down
     clrm.style.background = "red"; // No modifier
 }
 function clr_dp() {
-    const clrn = document.getElementById("clr-n") // Color for the name of the move
-    const clrm = document.getElementById("clr-m") // Color for the modifier
     clrn.style.background = "pink" // Down
     clrm.style.background = "blue" // Modifier (prime ')
 }
 function clr_d2() {
-    const clrn = document.getElementById("clr-n") // Color for the name of the move
-    const clrm = document.getElementById("clr-m") // Color for the modifier
     clrn.style.background = "pink" // Down
     clrm.style.background = "green" // Modifier (2)
 }
-
-
-
-// batterie code
-function batterieChangeValue(selector, value) {
-    document
-      .querySelector(selector)
-      .style.setProperty("--middle", String(100 - value) + "%");
-    document
-      .querySelector(selector)
-      .style.setProperty(
-        "--middle",
-        document.querySelector(selector).style.getPropertyValue("--middle")
-      );
-    document.querySelector(selector).dataset.charge = String(value) + "%";
-  }
-  function batterieChargeState(selector, value) {
-    if (value) {
-      document
-        .querySelector(selector)
-        .style.setProperty("--visbility", "visible");
-    } else {
-      document.querySelector(selector).style.setProperty("--visbility", "hidden");
-    }
-  }
-  
-batterieChangeValue(".cssBatterie", 100);
-batterieChargeState(".cssBatterie", true);
