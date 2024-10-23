@@ -15,8 +15,8 @@ body {
 }
 
 #cube twisty-player {
-    width: 15em;
-    height: 15em
+    width: 90%;
+    height: 80%;
 }
 
 .controls {

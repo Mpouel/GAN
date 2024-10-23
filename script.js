@@ -100,18 +100,37 @@ function clr_l2() {
 function clr_b() {
     const clrn = document.getElementById("clr-n") // Color for the name of the move
     const clrm = document.getElementById("clr-m")
-    clrn.style.background = ""; // Back
+    clrn.style.background = "yellow"; // Back
     clrm.style.background = "red"; // No modifier
 }
 function clr_bp() {
     const clrn = document.getElementById("clr-n") // Color for the name of the move
     const clrm = document.getElementById("clr-m")
-    clrn.style.background = "red" // Back
+    clrn.style.background = "yellow" // Back
     clrm.style.background = "blue" // Modifier (prime ')
 }
 function clr_b2() {
     const clrn = document.getElementById("clr-n") // Color for the name of the move
     const clrm = document.getElementById("clr-m")
-    clrn.style.background = "" // Back
+    clrn.style.background = "yellow" // Back
+    clrm.style.background = "green" // Modifier (2)
+}
+//====================================================
+function clr_d() {
+    const clrn = document.getElementById("clr-n") // Color for the name of the move
+    const clrm = document.getElementById("clr-m")
+    clrn.style.background = "pink"; // Down
+    clrm.style.background = "red"; // No modifier
+}
+function clr_dp() {
+    const clrn = document.getElementById("clr-n") // Color for the name of the move
+    const clrm = document.getElementById("clr-m")
+    clrn.style.background = "pink" // Down
+    clrm.style.background = "blue" // Modifier (prime ')
+}
+function clr_d2() {
+    const clrn = document.getElementById("clr-n") // Color for the name of the move
+    const clrm = document.getElementById("clr-m")
+    clrn.style.background = "pink" // Down
     clrm.style.background = "green" // Modifier (2)
 }
