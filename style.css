@@ -1,0 +1,19 @@
+html body {
+    width: 100vw;
+    height: 100vh;
+    background-color: #666;
+    margin: 0px;
+    padding: 0px;
+}
+
+.cube-view {
+    width: 375px;
+    height: 280px;
+    position: fixed;
+    overflow: visible;
+}
+
+.mac {
+    position: fixed;
+    top: 320px;
+}
