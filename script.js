@@ -69,7 +69,7 @@ document.getElementById('cube-view').onload = function () {
                             lol = 0
                     }
                     if (lol == 1) { setTimeout(clr_reset, 2000) }
-                    else { console.log("LOL = :(") }
+                    else { console.error("LOL = :(") }
                 }
             }
         };
