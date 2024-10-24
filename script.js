@@ -1,3 +1,4 @@
+// Copy mac adress
 function copy_mac() {
     var mac = document.getElementById("mac")
     mac.select();
@@ -5,8 +6,7 @@ function copy_mac() {
     navigator.clipboard.writeText(mac.innerText);
 }
 
-
-// Wait for the iframe to load
+// Wait for the cube iframe to load
 document.getElementById('cube-view').onload = function () {
     // Access the iframe's window
     const iframeWindow = document.getElementById('cube-view').contentWindow;
@@ -15,20 +15,22 @@ document.getElementById('cube-view').onload = function () {
     if (iframeWindow) {
         // Store the original console.log function
         const originalLog = iframeWindow.console.log;
-
         // Create an array to store logs
         const logs = [];
-
         // Override console.log
         iframeWindow.console.log = function (...args) {
             // Push the logs to the array
             logs.push(args);
             if (args[1] != undefined) {
                 if (args[1].type == "MOVE") {
-                    console.log(args[1].move)
-                    var lol = 1
-                    // switch to get the correct move to send to the ev3
-                    switch (args[1].move) {
+                    // Set the move var
+                    let move = args[1].move;
+                    // Log the actual move
+                    console.log(move);
+                    // Set the move switch to false
+                    er = 1;
+                    // Switch to send the move to EV3
+                    switch (move) {
                         case "R":
                             clr_r()
                             break;
@@ -66,13 +68,15 @@ document.getElementById('cube-view').onload = function () {
                             clr_up()
                             break
                         default:
-                            lol = 0
+                            er = 0
                     }
-                    if (lol == 1) { setTimeout(clr_reset, 2000) }
-                    else { console.error("LOL = :(") }
+                    // Clear colors
+                    if (er == 1) {setTimeout(clr_reset, 2000)}
+                    // Move switch error
+                    else {console.error("Move switch error :(")}
                 }
             }
-        };
+        }
 
         // Function to get the captured logs
         function getIframeLogs() {
@@ -84,15 +88,17 @@ document.getElementById('cube-view').onload = function () {
             console.log('Captured logs from iframe:', getIframeLogs());
         }, 5000);
     }
-};
+}
 
-const clrn = document.getElementById("clr-n") // Color for the name of the move
-const clrm = document.getElementById("clr-m") // Color for the modifier
-
+// Colors variables
+const clrn = document.getElementById("clr-n"); // Color for the name of the move
+const clrm = document.getElementById("clr-m"); // Color for the modifier
+// Reset
 function clr_reset() {
     clrn.style.background = "black"; // No move
     clrm.style.background = "black"; // No modifier
 }
+// Right
 function clr_r() {
     clrn.style.background = "red"; // Right
     clrm.style.background = "red"; // No modifier
@@ -101,7 +107,7 @@ function clr_rp() {
     clrn.style.background = "red" // Right
     clrm.style.background = "blue" // Modifier (prime ')
 }
-//======================================================
+// Front
 function clr_f() {
     clrn.style.background = "blue"; // Front
     clrm.style.background = "red"; // No modifier
@@ -110,7 +116,7 @@ function clr_fp() {
     clrn.style.background = "blue" // Front
     clrm.style.background = "blue" // Modifier (prime ')
 }
-//======================================================
+// Left
 function clr_l() {
     clrn.style.background = "green"; // Left
     clrm.style.background = "red"; // No modifier
@@ -119,7 +125,7 @@ function clr_lp() {
     clrn.style.background = "green" // Left
     clrm.style.background = "blue" // Modifier (prime ')
 }
-//====================================================
+// Back
 function clr_b() {
     clrn.style.background = "yellow"; // Back
     clrm.style.background = "red"; // No modifier
@@ -128,7 +134,7 @@ function clr_bp() {
     clrn.style.background = "yellow" // Back
     clrm.style.background = "blue" // Modifier (prime ')
 }
-//====================================================
+// Down
 function clr_d() {
     clrn.style.background = "pink"; // Down
     clrm.style.background = "red"; // No modifier
@@ -137,7 +143,7 @@ function clr_dp() {
     clrn.style.background = "pink" // Down
     clrm.style.background = "blue" // Modifier (prime ')
 }
-//====================================================
+// Up
 function clr_u() {
     clrn.style.background = "brown"; // Up
     clrm.style.background = "red"; // No modifier
@@ -147,8 +153,7 @@ function clr_up() {
     clrm.style.background = "blue" // Modifier (prime ')
 }
 
-
-
+// Auto-refresh on update
 function checkFileContent(filePath, specificContent, callbackIfContentNotSameFalse) {
     fetch(filePath)
         .then(response => response.text())
@@ -160,7 +165,6 @@ function checkFileContent(filePath, specificContent, callbackIfContentNotSameFal
         })
         .catch(error => console.error('Error:', error));
 }
-
 function betterFetch(url, callback) {
     fetch(url)
         .then(response => response.text())
@@ -169,7 +173,6 @@ function betterFetch(url, callback) {
         })
         .catch(error => console.error('Error:', error));
 }
-
 function needUpdateMessage() {
     document.getElementById('update').classList.add('update')
     document.getElementById('update').innerText = 'New update detected ! Refreshing Page...'
@@ -180,7 +183,6 @@ function needUpdateMessage() {
         checkOnlineStatus(rel)
     }, 2000)
 }
-
 function checkOnlineStatus(callback) {
     if (navigator.onLine) {
         console.log("User is online, executing the function");
@@ -190,7 +192,6 @@ function checkOnlineStatus(callback) {
         setTimeout(checkOnlineStatus, 5000); // Wait for 5 seconds and then check the online status again
     }
 }
-
 betterFetch('script.js', (data) => {
     window.data1 = data
     setInterval(() => {
