@@ -139,11 +139,11 @@ function clr_dp() {
 }
 //====================================================
 function clr_u() {
-    clrn.style.background = "brown"; // Down
+    clrn.style.background = "brown"; // Up
     clrm.style.background = "red"; // No modifier
 }
 function clr_up() {
-    clrn.style.background = "brown" // Down
+    clrn.style.background = "brown" // Up
     clrm.style.background = "blue" // Modifier (prime ')
 }
 
