@@ -60,10 +60,10 @@ document.getElementById('cube-view').onload = function () {
                             clr_dp()
                             break
                         case "U":
-                            clr_d()
+                            clr_u()
                             break;
                         case "U'":
-                            clr_dp()
+                            clr_up()
                             break
                         default:
                             lol = 0
