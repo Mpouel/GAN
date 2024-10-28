@@ -104,7 +104,7 @@ function send_signal() {
     clrm.style.background = "yellow"; // SS
     clr_reset()
 }
-}
+
 // Reset
 function clr_reset() {
     clrn.style.background = "black"; // No move
