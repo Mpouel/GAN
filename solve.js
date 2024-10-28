@@ -17,17 +17,19 @@ document.getElementById('cube-view').onload = function () {
         const originalLog = iframeWindow.console.log;
         // Create an array to store logs
         const logs = [];
+        let moves = []
         // Override console.log
         iframeWindow.console.log = function (...args) {
             // Push the logs to the array
             logs.push(args);
             if (args[1] != undefined) {
                 if (args[1].type == "MOVE") {
-                    // Set the move var
+                    // Set the move var and push move into moves
                     let move = args[1].move;
-                    // Log the actual move
-                    console.log(move);
-                    console.log(logs)
+                    moves.push(move)
+                    // Log the actual move and moves
+                    console.log(move);s
+                    console.log(moves)
                 }
             }
         }
