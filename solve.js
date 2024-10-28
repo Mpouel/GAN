@@ -6,6 +6,7 @@ function copy_mac() {
     navigator.clipboard.writeText(mac.innerText);
 }
 
+const moves = [];
 // Wait for the cube iframe to load
 document.getElementById('cube-view').onload = function () {
     // Access the iframe's window
@@ -17,7 +18,6 @@ document.getElementById('cube-view').onload = function () {
         const originalLog = iframeWindow.console.log;
         // Create an array to store logs
         const logs = [];
-        let moves = []
         // Override console.log
         iframeWindow.console.log = function (...args) {
             // Push the logs to the array
@@ -25,7 +25,7 @@ document.getElementById('cube-view').onload = function () {
             if (args[1] != undefined) {
                 if (args[1].type == "MOVE") {
                     // Set the move var and push move into moves
-                    let move = args[1].move;
+                    const move = args[1].move;
                     moves.push(move);
                     // Log the actual move and moves
                     console.log(move);
@@ -46,9 +46,65 @@ document.getElementById('cube-view').onload = function () {
     }
 }
 
+function send() {
+    const nmoves = moves.length; 
+    if (nmoves > 0) {
+        const rmoves = moves.reverse
+        send_signal()
+        rmoves.forEach(move => {
+            switch (move) {
+                case "R":
+                    clr_rp()
+                    break;
+                case "R'":
+                    clr_r()
+                    break;
+                case "F":
+                    clr_fp()
+                    break;
+                case "F'":
+                    clr_f()
+                    break;
+                case "L":
+                    clr_lp()
+                    break;
+                case "L'":
+                    clr_l()
+                    break;
+                case "B":
+                    clr_bp()
+                    break;
+                case "B'":
+                    clr_b()
+                    break;
+                case "D":
+                    clr_dp()
+                    break;
+                case "D'":
+                    clr_d()
+                    break
+                case "U":
+                    clr_up()
+                    break;
+                case "U'":
+                    clr_u()
+                    break
+            }
+            setTimeout(clr_reset, 1000)
+        });
+    }
+}
+
 // Colors variables
 const clrn = document.getElementById("clr-n"); // Color for the name of the move
 const clrm = document.getElementById("clr-m"); // Color for the modifier
+
+function send_signal() {
+    clrn.style.background = "yellow"; // SS
+    clrm.style.background = "yellow"; // SS
+    clr_reset()
+}
+}
 // Reset
 function clr_reset() {
     clrn.style.background = "black"; // No move
