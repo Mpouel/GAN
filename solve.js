@@ -204,10 +204,10 @@ function checkOnlineStatus(callback) {
         setTimeout(checkOnlineStatus, 5000); // Wait for 5 seconds and then check the online status again
     }
 }
-betterFetch('script.js', (data) => {
+betterFetch('solve.js', (data) => {
     window.data1 = data
     setInterval(() => {
-        checkFileContent('script.js', window.data1, (data) => {
+        checkFileContent('solve.js', window.data1, (data) => {
             if (!navigator.onLine) {
                 return
             }
