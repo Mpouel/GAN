@@ -26,10 +26,10 @@ document.getElementById('cube-view').onload = function () {
                 if (args[1].type == "MOVE") {
                     // Set the move var and push move into moves
                     let move = args[1].move;
-                    moves.push(move)
+                    moves.push(move);
                     // Log the actual move and moves
-                    console.log(move);s
-                    console.log(moves)
+                    console.log(move);
+                    console.log(moves);
                 }
             }
         }
