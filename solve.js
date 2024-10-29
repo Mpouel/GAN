@@ -48,7 +48,7 @@ document.getElementById('cube-view').onload = function () {
 
 function send() {
     const nmoves = moves.length;
-    let rmoves = Array(moves.reverse)
+    let rmoves = Array(moves.reverse())
     send_signal()
     rmoves.forEach(rmove => {
         switch (rmove) {
