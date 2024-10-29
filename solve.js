@@ -89,6 +89,8 @@ function send() {
                 case "U'":
                     clr_u()
                     break
+                default:
+                    console.log("Invalid switch / case")
             }
             setTimeout(clr_reset, 1000)
         });
@@ -102,7 +104,7 @@ const clrm = document.getElementById("clr-m"); // Color for the modifier
 function send_signal() {
     clrn.style.background = "yellow"; // SS
     clrm.style.background = "yellow"; // SS
-    clr_reset()
+    setTimeout(clr_reset, 1000)
 }
 
 // Reset
