@@ -54,8 +54,8 @@ let rmoves = moves.reverse()
 function send() {
     rmoves = moves.reverse()
     send_signal()
-    sleep(10000).then(() => { clr_reset(); });
-    sleep(10000).then(() => { send_ev3(); })
+    sleep(1000).then(() => { clr_reset(); });
+    sleep(1000).then(() => { send_ev3(); })
 }
 
 function send_ev3() {
@@ -101,9 +101,9 @@ function send_ev3() {
                 console.log("Invalid switch / case", rmo, rmove, rmoves)
         }
         console.log("i")
-        sleep(1000).then(() => { clr_reset(); });
-        console.log("reset")
-        sleep(10000)
+        sleep(1000).then(() => { clr_reset(); }).then(() => {
+            console.log("reset")
+        });
     });
 }
 
