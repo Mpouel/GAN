@@ -98,6 +98,7 @@ function message(rmo) {
         default:
             console.log("Invalid switch / case", rmo, rmove, rmoves)
     }
+    setTimeout(clr_reset, 1000)
 }
 
 // Colors variables
