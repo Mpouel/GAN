@@ -45,9 +45,9 @@ document.getElementById('cube-view').onload = function () {
         }, 5000);
     }
 }
-
+let rmoves = moves.reverse()
 function send() {
-    let rmoves = moves.reverse()
+    rmoves = moves.reverse()
     send_signal()
     setTimeout(clr_reset, 1000)
     setTimeout(send_ev3, 1000)
