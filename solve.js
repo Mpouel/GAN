@@ -51,16 +51,16 @@ document.getElementById('cube-view').onload = function () {
 }
 
 let rmoves = moves.reverse()
-function send() {
+async function send() {
     rmoves = moves.reverse()
     send_signal()
-    sleep(1000)
-        .then(() => { clr_reset() })
-        .then(() => { sleep(1000) })
-        .then(() => { send_ev3() })
+    await sleep(1000)
+    clr_reset()
+    await sleep(1000)
+    send_ev3()
 }
 
-function send_ev3() {
+async function send_ev3() {
     rmoves.forEach(rmove => {
         switch (rmove) {
             case "R":
@@ -103,9 +103,10 @@ function send_ev3() {
                 console.log("Invalid switch / case", rmo, rmove, rmoves)
         }
         console.log("i", rmove, " inverted")
-        sleep(1000)
-            .then(() => { clr_reset() })
-            .then(() => { console.log("reset") })
+        sleep(1000).then(() => {
+            clr_reset()
+            console.log("reset")
+        })
     });
 }
 
