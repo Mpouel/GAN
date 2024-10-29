@@ -50,8 +50,8 @@ function send() {
     const nmoves = moves.length;
     let rmoves = Array(moves.reverse)
     send_signal()
-    rmoves.forEach(move => {
-        switch (move) {
+    rmoves.forEach(rmove => {
+        switch (rmove) {
                 case "R":
                     clr_rp()
                     break;
@@ -89,7 +89,7 @@ function send() {
                     clr_u()
                     break
                 default:
-                    console.log("Invalid switch / case")
+                    console.log("Invalid switch / case", rmove)
         }
         setTimeout(clr_reset, 1000)
     });
