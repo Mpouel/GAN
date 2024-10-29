@@ -1,3 +1,7 @@
+function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
 // Copy mac adress
 function copy_mac() {
     var mac = document.getElementById("mac")
@@ -45,91 +49,81 @@ document.getElementById('cube-view').onload = function () {
         }, 5000);
     }
 }
+
 let rmoves = moves.reverse()
 function send() {
     rmoves = moves.reverse()
-    console.log("before send_signal")
     send_signal()
-    console.log("after send_signal")
-    setTimeout(clr_reset, 1000)
-    console.log("after clr_reset")
-    setTimeout(send_ev3, 1000)
+    sleep(1000).then(() => { clr_reset(); });
+    sleep(1000).then(() => { send_ev3(); })
 }
 
-async function send_ev3() {
+function send_ev3() {
     rmoves.forEach(rmove => {
-        console.log("before message")
-        message(rmove);
-        console.log("after message")
-        console.log("before clr_reset")
-        setTimeout(clr_reset, 1000)
-        console.log("after clr_reset")
+        switch (rmove) {
+            case "R":
+                clr_rp()
+                break;
+            case "R'":
+                clr_r()
+                break;
+            case "F":
+                clr_fp()
+                break;
+            case "F'":
+                clr_f()
+                break;
+            case "L":
+                clr_lp()
+                break;
+            case "L'":
+                clr_l()
+                break;
+            case "B":
+                clr_bp()
+                break;
+            case "B'":
+                clr_b()
+                break;
+            case "D":
+                clr_dp()
+                break;
+            case "D'":
+                clr_d()
+                break
+            case "U":
+                clr_up()
+                break;
+            case "U'":
+                clr_u()
+                break
+            default:
+                console.log("Invalid switch / case", rmo, rmove, rmoves)
+        }
+        sleep(1000).then(() => { clr_reset(); });
     });
-}
-
-async function message(rmo) {
-    switch (rmo) {
-        case "R":
-            clr_rp()
-            break;
-        case "R'":
-            clr_r()
-            break;
-        case "F":
-            clr_fp()
-            break;
-        case "F'":
-            clr_f()
-            break;
-        case "L":
-            clr_lp()
-            break;
-        case "L'":
-            clr_l()
-            break;
-        case "B":
-            clr_bp()
-            break;
-        case "B'":
-            clr_b()
-            break;
-        case "D":
-            clr_dp()
-            break;
-        case "D'":
-            clr_d()
-            break
-        case "U":
-            clr_up()
-            break;
-        case "U'":
-            clr_u()
-            break
-        default:
-            console.log("Invalid switch / case", rmo, rmove, rmoves)
-    }
 }
 
 // Colors variables
 const clrn = document.getElementById("clr-n"); // Color for the name of the move
 const clrm = document.getElementById("clr-m"); // Color for the modifier
 
-async function send_signal() {
+function send_signal() {
     clrn.style.background = "yellow"; // SS
     clrm.style.background = "yellow"; // SS
 }
 
 // Reset
-async function clr_reset() {
+function clr_reset() {
     clrn.style.background = "black"; // No move
     clrm.style.background = "black"; // No modifier
 }
 // Right
-async function clr_r() {
+function clr_r() {
     clrn.style.background = "red"; // Right
     clrm.style.background = "red"; // No modifier
 }
-async function clr_rp() {
+function clr_rp() {
     clrn.style.background = "red" // Right
     clrm.style.background = "blue" // Modifier (prime ')
 }
@@ -170,11 +164,11 @@ function clr_dp() {
     clrm.style.background = "blue" // Modifier (prime ')
 }
 // Up
-async function clr_u() {
+function clr_u() {
     clrn.style.background = "brown"; // Up
     clrm.style.background = "red"; // No modifier
 }
-async function clr_up() {
+function clr_up() {
     clrn.style.background = "brown" // Up
     clrm.style.background = "blue" // Modifier (prime ')
 }
