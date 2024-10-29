@@ -90,6 +90,7 @@ function send() {
                 default:
                     console.log("Invalid switch / case", rmove)
         }
+        rmove = "lol"
         setTimeout(clr_reset, 1000)
     });
 }
