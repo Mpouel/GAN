@@ -109,10 +109,9 @@ async function send_ev3() {
                 console.log("Invalid switch / case", rmo, rmove, rmoves)
         }
         console.log("i", rmove, " inverted")
-        sleep(1000).then(() => {
-            clr_reset()
-            console.log("reset")
-        })
+        sleep(1000)
+        clr_reset()
+        console.log("reset")
     });
 }
 
