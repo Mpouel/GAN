@@ -53,14 +53,14 @@ function send() {
     setTimeout(send_ev3, 1000)
 }
 
-function send_ev3() {
+async function send_ev3() {
     rmoves.forEach(rmove => {
         message(rmove);
         setTimeout(clr_reset, 1000)
     });
 }
 
-function message(rmo) {
+async function message(rmo) {
     switch (rmo) {
         case "R":
             clr_rp()
@@ -107,7 +107,7 @@ function message(rmo) {
 const clrn = document.getElementById("clr-n"); // Color for the name of the move
 const clrm = document.getElementById("clr-m"); // Color for the modifier
 
-function send_signal() {
+async function send_signal() {
     clrn.style.background = "yellow"; // SS
     clrm.style.background = "yellow"; // SS
 }
@@ -118,15 +118,13 @@ async function clr_reset() {
     clrm.style.background = "black"; // No modifier
 }
 // Right
-function clr_r() {
+async function clr_r() {
     clrn.style.background = "red"; // Right
     clrm.style.background = "red"; // No modifier
-    setTimeout(clr_reset, 1000)
 }
-function clr_rp() {
+async function clr_rp() {
     clrn.style.background = "red" // Right
     clrm.style.background = "blue" // Modifier (prime ')
-    setTimeout(clr_reset, 1000)
 }
 // Front
 function clr_f() {
@@ -165,15 +163,13 @@ function clr_dp() {
     clrm.style.background = "blue" // Modifier (prime ')
 }
 // Up
-function clr_u() {
+async function clr_u() {
     clrn.style.background = "brown"; // Up
     clrm.style.background = "red"; // No modifier
-    setTimeout(clr_reset, 1000)
 }
-function clr_up() {
+async function clr_up() {
     clrn.style.background = "brown" // Up
     clrm.style.background = "blue" // Modifier (prime ')
-    setTimeout(clr_reset, 1000)
 }
 
 // Auto-refresh on update
