@@ -54,48 +54,50 @@ function send() {
 }
 
 function send_ev3() {
-    rmoves.forEach(rmove => {
-        switch (rmove) {
-                case "R":
-                    clr_rp()
-                    break;
-                case "R'":
-                    clr_r()
-                    break;
-                case "F":
-                    clr_fp()
-                    break;
-                case "F'":
-                    clr_f()
-                    break;
-                case "L":
-                    clr_lp()
-                    break;
-                case "L'":
-                    clr_l()
-                    break;
-                case "B":
-                    clr_bp()
-                    break;
-                case "B'":
-                    clr_b()
-                    break;
-                case "D":
-                    clr_dp()
-                    break;
-                case "D'":
-                    clr_d()
-                    break
-                case "U":
-                    clr_up()
-                    break;
-                case "U'":
-                    clr_u()
-                    break
-                default:
-                    console.log("Invalid switch / case", rmove)
-        }
-    });
+    rmoves.forEach(rmove => message(rmove));
+}
+
+function message(rmo) {
+    switch (rmo) {
+        case "R":
+            clr_rp()
+            break;
+        case "R'":
+            clr_r()
+            break;
+        case "F":
+            clr_fp()
+            break;
+        case "F'":
+            clr_f()
+            break;
+        case "L":
+            clr_lp()
+            break;
+        case "L'":
+            clr_l()
+            break;
+        case "B":
+            clr_bp()
+            break;
+        case "B'":
+            clr_b()
+            break;
+        case "D":
+            clr_dp()
+            break;
+        case "D'":
+            clr_d()
+            break
+        case "U":
+            clr_up()
+            break;
+        case "U'":
+            clr_u()
+            break
+        default:
+            console.log("Invalid switch / case", rmo, rmove, rmoves)
+    }
 }
 
 // Colors variables
