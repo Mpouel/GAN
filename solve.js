@@ -1,6 +1,12 @@
-function sleep(ms) {
+/*function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-}
+}*/
+function sleep(miliseconds) {
+    var currentTime = new Date().getTime();
+ 
+    while (currentTime + miliseconds >= new Date().getTime()) {
+    }
+ }
 
 // Copy mac adress
 function copy_mac() {
