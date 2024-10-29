@@ -102,7 +102,7 @@ function send_ev3() {
             default:
                 console.log("Invalid switch / case", rmo, rmove, rmoves)
         }
-        console.log("i")
+        console.log("i", rmove, " inverted")
         sleep(1000)
             .then(() => { clr_reset() })
             .then(() => { console.log("reset") })
