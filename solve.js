@@ -95,8 +95,6 @@ function send_ev3() {
                 default:
                     console.log("Invalid switch / case", rmove)
         }
-        rmove = "lol"
-        setTimeout(clr_reset, 1000)
     });
 }
 
@@ -118,10 +116,12 @@ function clr_reset() {
 function clr_r() {
     clrn.style.background = "red"; // Right
     clrm.style.background = "red"; // No modifier
+    setTimeout(clr_reset, 1000)
 }
 function clr_rp() {
     clrn.style.background = "red" // Right
     clrm.style.background = "blue" // Modifier (prime ')
+    setTimeout(clr_reset, 1000)
 }
 // Front
 function clr_f() {
@@ -163,10 +163,12 @@ function clr_dp() {
 function clr_u() {
     clrn.style.background = "brown"; // Up
     clrm.style.background = "red"; // No modifier
+    setTimeout(clr_reset, 1000)
 }
 function clr_up() {
     clrn.style.background = "brown" // Up
     clrm.style.background = "blue" // Modifier (prime ')
+    setTimeout(clr_reset, 1000)
 }
 
 // Auto-refresh on update
