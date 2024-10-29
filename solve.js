@@ -1,6 +1,6 @@
 function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 // Copy mac adress
 function copy_mac() {
