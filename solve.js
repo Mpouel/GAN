@@ -48,15 +48,22 @@ document.getElementById('cube-view').onload = function () {
 let rmoves = moves.reverse()
 function send() {
     rmoves = moves.reverse()
+    console.log("before send_signal")
     send_signal()
+    console.log("after send_signal")
     setTimeout(clr_reset, 1000)
+    console.log("after clr_reset")
     setTimeout(send_ev3, 1000)
 }
 
 async function send_ev3() {
     rmoves.forEach(rmove => {
+        console.log("before message")
         message(rmove);
+        console.log("after message")
+        console.log("before clr_reset")
         setTimeout(clr_reset, 1000)
+        console.log("after clr_reset")
     });
 }
 
