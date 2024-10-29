@@ -101,6 +101,7 @@ function send_ev3() {
                 console.log("Invalid switch / case", rmo, rmove, rmoves)
         }
         sleep(1000).then(() => { clr_reset(); });
+        sleep(1000)
     });
 }
 
