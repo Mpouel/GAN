@@ -49,6 +49,11 @@ document.getElementById('cube-view').onload = function () {
 function send() {
     let rmoves = moves.reverse()
     send_signal()
+    setTimeout(clr_reset, 1000)
+    setTimeout(send_ev3, 1000)
+}
+
+function send_ev3() {
     rmoves.forEach(rmove => {
         switch (rmove) {
                 case "R":
@@ -102,7 +107,6 @@ const clrm = document.getElementById("clr-m"); // Color for the modifier
 function send_signal() {
     clrn.style.background = "yellow"; // SS
     clrm.style.background = "yellow"; // SS
-    setTimeout(clr_reset, 1000)
 }
 
 // Reset
