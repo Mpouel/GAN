@@ -106,7 +106,7 @@ async function send_ev3() {
                 clr_u()
                 break
             default:
-                console.log("Invalid switch / case", rmo, rmove, rmoves)
+                console.log("Invalid switch / case", rmove, rmoves)
         }
         console.log("i", rmove, " inverted")
         sleep(1000)
