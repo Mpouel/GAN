@@ -54,7 +54,10 @@ function send() {
 }
 
 function send_ev3() {
-    rmoves.forEach(rmove => message(rmove));
+    rmoves.forEach(rmove => {
+        message(rmove);
+        setTimeout(clr_reset, 1000)
+    });
 }
 
 function message(rmo) {
@@ -98,7 +101,6 @@ function message(rmo) {
         default:
             console.log("Invalid switch / case", rmo, rmove, rmoves)
     }
-    setTimeout(clr_reset, 1000)
 }
 
 // Colors variables
@@ -111,7 +113,7 @@ function send_signal() {
 }
 
 // Reset
-function clr_reset() {
+async function clr_reset() {
     clrn.style.background = "black"; // No move
     clrm.style.background = "black"; // No modifier
 }
