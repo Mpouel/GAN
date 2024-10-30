@@ -108,12 +108,16 @@ async function send_ev3() {
             default:
                 console.log("Invalid switch / case", rmove, rmoves)
         }
-        console.log("i", rmove, " inverted")
-        sleep2(1000).then(() => {clr_reset()})
-        // clr_reset()
-        sleep2(2000).then(() => {console.log("reset")})
-        // console.log("reset")
+        mes(rmove)
     });
+}
+
+async function mes(rmove) {
+    console.log("i", rmove, " inverted")
+    await sleep(1000)//.then(() => {clr_reset()})
+    clr_reset()
+    await sleep(1000)//.then(() => {console.log("reset")})
+    console.log("reset")
 }
 
 // Colors variables
