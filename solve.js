@@ -111,6 +111,7 @@ async function send_ev3() {
         console.log("i", rmove, " inverted")
         sleep(1000)
         clr_reset()
+        sleep(1001)
         console.log("reset")
     });
 }
