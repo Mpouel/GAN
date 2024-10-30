@@ -66,58 +66,104 @@ async function send() {
     send_ev3()
 }
 
+let rmov = "LOL"
+
 async function send_ev3() {
-    rmoves.forEach(rmove => {
-        switch (rmove) {
+    rmoves.forEach(mov => {
+        switch (mov) {
             case "R":
-                clr_rp()
+                rmov = "R'"
                 break;
             case "R'":
-                clr_r()
+                rmov = "R"
                 break;
             case "F":
-                clr_fp()
+                rmov = "F'"
                 break;
             case "F'":
-                clr_f()
+                rmov = "F"
                 break;
             case "L":
-                clr_lp()
+                rmov = "L'"
                 break;
             case "L'":
-                clr_l()
+                rmov = "L"
                 break;
             case "B":
-                clr_bp()
+                rmov = "B'"
                 break;
             case "B'":
-                clr_b()
+                rmov = "B"
                 break;
             case "D":
-                clr_dp()
+                rmov = "D'"
                 break;
             case "D'":
-                clr_d()
+                rmov = "D"
                 break
             case "U":
-                clr_up()
+                rmov = "U'"
                 break;
             case "U'":
-                clr_u()
+                rmov = "U"
                 break
             default:
                 console.log("Invalid switch / case", rmove, rmoves)
         }
-        mes(rmove)
+        move(rmov)
+        mes(rmov)
     });
 }
 
 async function mes(rmove) {
-    console.log("i", rmove, " inverted")
+    console.log("Do:", rmove)
     await sleep(1000)//.then(() => {clr_reset()})
     clr_reset()
     await sleep(1000)//.then(() => {console.log("reset")})
     console.log("reset")
+}
+
+async function move(mov) {
+    switch (mov) {
+        case "R":
+            clr_r()
+            break;
+        case "R'":
+            clr_rp()
+            break;
+        case "F":
+            clr_f()
+            break;
+        case "F'":
+            clr_fp()
+            break;
+        case "L":
+            clr_l()
+            break;
+        case "L'":
+            clr_lp()
+            break;
+        case "B":
+            clr_b()
+            break;
+        case "B'":
+            clr_bp()
+            break;
+        case "D":
+            clr_d()
+            break;
+        case "D'":
+            clr_dp()
+            break
+        case "U":
+            clr_u()
+            break;
+        case "U'":
+            clr_up()
+            break
+        default:
+            console.log("Invalid switch / case", rmove, rmoves)
+    }
 }
 
 // Colors variables
