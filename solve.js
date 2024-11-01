@@ -108,12 +108,8 @@ async function send_ev3() {
             default:
                 console.log("Invalid switch / case", rmove, rmoves)
         };
+        console.log("Move:", rmov)
         move(rmov);
-        //mes(rmov);
-        console.log("Move:", rmove)
-        setTimeout(() => {clr_reset();console.log("reset");}, 1000);
-        //clr_reset();
-        //console.log("reset");
     });
 }
 
@@ -166,6 +162,7 @@ async function move(mov) {
         default:
             console.log("Invalid switch / case", rmove, rmoves)
     }
+    setTimeout(() => {clr_reset();console.log("reset");}, 1000);
 }
 
 // Colors variables
