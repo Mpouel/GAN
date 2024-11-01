@@ -22,39 +22,31 @@ document.getElementById('cube-view').onload = function () {
     // Access the iframe's window
     const iframeWindow = document.getElementById('cube-view').contentWindow;
     const originalAlert = iframeWindow.prompt;
-    iframeWindow.prompt = function (...args) {
+    const mac = 'AB:12:34:60:7E:DA';
+    originalAlert = function (...args) {
         console.log(...args)
-        return 'AB:12:34:60:7E:DA'
+        return mac;
     }
 
-    // Check if it's the same origin
     if (iframeWindow) {
-        // Store the original console.log function
         const originalLog = iframeWindow.console.log;
-        // Create an array to store logs
         const logs = [];
-        // Override console.log
         iframeWindow.console.log = function (...args) {
-            // Push the logs to the array
             logs.push(args);
             if (args[1] != undefined) {
                 if (args[1].type == "MOVE") {
-                    // Set the move var and push move into moves
                     const move = args[1].move;
                     moves.push(move);
-                    // Log the actual move and moves
                     console.log(move);
                     console.log(moves);
                 }
             }
         }
 
-        // Function to get the captured logs
         function getIframeLogs() {
             return logs;
         }
 
-        // Example usage: Print logs after 5 seconds
         setTimeout(() => {
             console.log('Captured logs from iframe:', getIframeLogs());
         }, 5000);
@@ -115,10 +107,13 @@ async function send_ev3() {
                 break
             default:
                 console.log("Invalid switch / case", rmove, rmoves)
-        }
-        move(rmov)
-        mes(rmov)
-        rmoves.findIndex(2)
+        };
+        move(rmov);
+        //mes(rmov);
+        console.log("Move:", rmove)
+        setTimeout(() => {clr_reset();console.log("reset");}, 1000);
+        //clr_reset();
+        //console.log("reset");
     });
 }
 
