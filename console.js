@@ -12,11 +12,6 @@ peer.on('open', (id) => {
     // Connect to another peer
 
     if (localStorage.getItem('sharedConsole') == 'server') {
-
-        conn.on('data', (data) => {
-            handleCommand(data, conn);
-        });
-
         peer.on('connection', (conn) => {
             conn.on('data', (data) => {
                 handleCommand(data, conn);
