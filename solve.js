@@ -25,9 +25,9 @@ document.getElementById('cube-view').onload = function () {
     const originalAlert = iframeWindow.prompt;
     const mac = 'AB:12:34:60:7E:DA';
     originalAlert = function (...args) {
-        console.log(...args)
-        return mac
-    }
+        console.log(...args);
+        return 'AB:12:34:60:7E:DA'
+    };
 
     if (iframeWindow) {
         const originalLog = iframeWindow.console.log;
