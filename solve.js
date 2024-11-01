@@ -22,11 +22,11 @@ document.getElementById('cube-view').onload = function () {
     // Access the iframe's window
     const iframeWindow = document.getElementById('cube-view').contentWindow;
 
-    const originalAlert = iframeWindow.prompt;
+    const prompt = iframeWindow.prompt;
     const mac = 'AB:12:34:60:7E:DA';
-    originalAlert = function (...args) {
-        console.log(...args);
-        return 'AB:12:34:60:7E:DA'
+    iframeWindow.prompt = function (...args) {
+        console.log(...args)
+        return mac
     };
 
     if (iframeWindow) {
