@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 html body {
     width: 100vw;
     height: 100vh;
     background-color: black !important;
     margin: 0px;
     padding: 0px;
+    font-family: "Montserrat", "Roboto", sans-serif;
 }
 
 .cube-view {
