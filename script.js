@@ -10,7 +10,11 @@ function copy_mac() {
 document.getElementById('cube-view').onload = function () {
     // Access the iframe's window
     const iframeWindow = document.getElementById('cube-view').contentWindow;
-
+        const originalAlert = iframeWindow.alert;
+        iframeWindow.promp = function (...args) {
+            console.log(...args)
+            return 'AB:12:34:60:7E:DA'
+        }
     // Check if it's the same origin
     if (iframeWindow) {
         // Store the original console.log function
