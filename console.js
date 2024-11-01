@@ -56,11 +56,13 @@ peer.on('open', (id) => {
                 conn.send(element)
             });
         }
+        console.error = function (...args) {
+            conn.send(args.toString())
+        }
         conn.on('data', (data) => {
-            handleCommand(data, conn);
+            displayMessage(message)
         });
     }
-}
 
     function displayMessage(message, type) {
 
