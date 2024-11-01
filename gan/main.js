@@ -38947,7 +38947,7 @@ var Ri = class extends Zc {
 Bn.define("twisty-managed-custom-element", Ri);
 var NR = null;
 async function E_() {
-    return NR ?? (NR = Xt(()=>import("./twisty-dynamic-3d-HF7KVBOE-BJhyURpC.js"), []))
+    return NR ?? (NR = Xt(()=>import("https://afedotov.github.io/gan-cube-sample/assets/twisty-dynamic-3d-HF7KVBOE-BJhyURpC.js"), []))
 }
 var ar = nd(async()=>(await E_()).T3I);
 function $p() {
