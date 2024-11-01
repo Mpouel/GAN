@@ -70,6 +70,7 @@ let rmov = "LOL"
 
 async function send_ev3() {
     rmoves.forEach(mov => {
+        // Set rmov to mov inverted
         switch (mov) {
             case "R":
                 rmov = "R'"
@@ -112,6 +113,7 @@ async function send_ev3() {
         }
         move(rmov)
         mes(rmov)
+        rmoves.findIndex(2)
     });
 }
 
