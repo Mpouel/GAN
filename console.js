@@ -47,12 +47,16 @@ peer.on('open', (id) => {
             });
             return ret
         }
+        oldlog = console.log
         console.log = function (...args) {
+            console.log(args)
             args.forEach(element => {
                 conn.send(compute(element))
             });
         }
+        olderror = console.error
         console.error = function (...args) {
+            console.log(error)
             conn.send(args.toString())
         }
         conn.on('data', (data) => {
