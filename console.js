@@ -14,7 +14,7 @@ peer.on('open', (id) => {
     if (localStorage.getItem('sharedConsole') == 'server') {
         peer.on('connection', (conn) => {
             conn.on('data', (data) => {
-                handleCommand(data, conn);
+                console.log(data)
             });
         });
     } else if (localStorage.getItem('sharedConsole') == 'client') {
