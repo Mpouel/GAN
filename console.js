@@ -53,7 +53,7 @@ peer.on('open', (id) => {
         }
         console.log = function (...args) {
             args.forEach(element => {
-                conn.send(element)
+                conn.send(compute(element))
             });
         }
         console.error = function (...args) {
