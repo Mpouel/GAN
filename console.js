@@ -8,12 +8,11 @@ if (localStorage.getItem('sharedConsole') == 'server') {
 }
 
 peer.on('open', (id) => {
-    // Connect to another peer
-
     if (localStorage.getItem('sharedConsole') == 'server') {
-        console.log('open as server')
+        console.log('open as client')
         peer.on('connection', (conn) => {
             conn.on('data', (data) => {
+                console.log('got')
                 console.log(data)
             });
         });
@@ -21,6 +20,7 @@ peer.on('open', (id) => {
         console.log('open as client')
         const peerId = 'ganrobotconsole';
         const conn = peer.connect(peerId);
+        console.log('connected to server')
 
         conn.on('open', () => {
             displayMessage('Connected to peer: ' + peerId, 'log');
@@ -68,9 +68,9 @@ peer.on('open', (id) => {
     function displayMessage(message, type) {
 
         // Log to console based on type
-        if (type === 'log') {
+        if (type == 'log') {
             console.log(message);
-        } else if (type === 'error') {
+        } else if (type == 'error') {
             console.error(message);
         }
     }
