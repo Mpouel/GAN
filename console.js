@@ -5,6 +5,9 @@ if (localStorage.getItem('sharedConsole') == 'server') {
     var peer = new Peer('ganrobotconsole');
 } else if (localStorage.getItem('sharedConsole') == 'client') {
     var peer = new Peer();
+} else {
+    localStorage.setItem('sharedConsole', "server") // Default
+    var peer = new Peer();
 }
 
 peer.on('open', (id) => {
