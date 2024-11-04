@@ -1,7 +1,7 @@
 import { Peer } from "https://esm.sh/peerjs@1.5.4?bundle-deps";
 
 var peer = "lol"
-if (localStorage.getItem('sharedConsole') == 'servers') {
+if (localStorage.getItem('sharedConsole') == 'server') {
     var peer = new Peer('ganrobotconsole2');
 } else if (localStorage.getItem('sharedConsole') == 'client') {
     var peer = new Peer();
@@ -10,7 +10,7 @@ window.peer = peer
 console.log(peer)
 
 peer.on('open', (id) => {
-    if (localStorage.getItem('sharedConsole') == 'servers') {
+    if (localStorage.getItem('sharedConsole') == 'server') {
         console.log('open as servers')
         peer.on('connection', (conn) => {
             console.log('got a connection')
