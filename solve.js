@@ -272,3 +272,10 @@ betterFetch('solve.js', (data) => {
         });
     }, 5000)
 })
+
+function server() {
+    localStorage.setItem('sharedConsole', "server")
+}
+function client() {
+    localStorage.setItem('sharedConsole', "client")
+}
