@@ -20,9 +20,9 @@ peer.on('open', (id) => {
         console.log('open as client')
         const peerId = 'ganrobotconsole';
         const conn = peer.connect(peerId);
-        console.log('connected to server')
 
         conn.on('open', () => {
+            console.log('connected to server')
             displayMessage('Connected to peer: ' + peerId, 'log');
             conn.send('Connected to console sharing');
         });
