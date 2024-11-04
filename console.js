@@ -15,6 +15,7 @@ peer.on('open', (id) => {
         peer.on('connection', (conn) => {
             console.log('got a connection')
             conn.on('data', (data) => {
+                console.log('got data')
                 console.log(data)
             });
         });
@@ -23,7 +24,7 @@ peer.on('open', (id) => {
         const peerId = 'ganrobotconsole';
         const conn = peer.connect(peerId);
         console.log('connecting to server')
-
+        conn.send('Connected to console sharing');
         conn.on('open', () => {
             console.log('connected to server')
             displayMessage('Connected to peer: ' + peerId, 'log');
