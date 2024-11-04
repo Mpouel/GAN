@@ -22,7 +22,7 @@ peer.on('open', (id) => {
     } else if (localStorage.getItem('sharedConsole') == 'client') {
         console.log('open as client')
         const peerId = 'ganrobotconsole2';
-        const conn = peer.connect(id);
+        const conn = peer.connect(peerId);
         console.log('connecting to server');
         conn.send('Connected to console sharing');
         conn.on('open', () => {
