@@ -98,6 +98,7 @@ function send() {
             };
             console.log("Move:", rmov);
             move(rmov);
+            setTimeout(console.log("ls"), 1000)
         });
     }
     else {
