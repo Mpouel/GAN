@@ -53,7 +53,7 @@ peer.on('open', (id) => {
             args.forEach(element => {
                 conn.send(compute(element))
             });
-        }// lol
+        }
         var olderror = console.error
         console.error = function (...args) {
             olderror(error)
@@ -74,3 +74,10 @@ peer.on('open', (id) => {
         }
     }
 });
+
+function server() {
+    localStorage.setItem('sharedConsole', "server")
+}
+function client() {
+    localStorage.setItem('sharedConsole', "client")
+}
