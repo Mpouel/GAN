@@ -23,10 +23,10 @@ peer.on('open', (id) => {
         console.log('open as client')
         const peerId = 'ganrobotconsole2';
         const conn = peer.connect(peerId);
-        console.log('connecting to server');
-        conn.send('Connected to console sharing');
+        console.log('Connecting to server...');
+        conn.send('Connecting to console sharing...');
         conn.on('open', () => {
-            console.log('connected to server')
+            console.log('Connected to server')
             displayMessage('Connected to peer: ' + peerId, 'log');
             conn.send('Connected to console sharing');
             function compute(...args) {
@@ -64,7 +64,7 @@ peer.on('open', (id) => {
                 olderror(error)
             }
             conn.on('data', (data) => {
-                displayMessage(message)
+                displayMessage(data)
             });
         });
     }
