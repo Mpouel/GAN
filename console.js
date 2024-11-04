@@ -5,22 +5,20 @@ if (localStorage.getItem('sharedConsole') == 'server') {
     var peer = new Peer('ganrobotconsole');
 } else if (localStorage.getItem('sharedConsole') == 'client') {
     var peer = new Peer();
-} else {
-    localStorage.setItem('sharedConsole', "server") // Default
-    var peer = new Peer();
 }
 
 peer.on('open', (id) => {
-    console.log('open')
     // Connect to another peer
 
     if (localStorage.getItem('sharedConsole') == 'server') {
+        console.log('open as server')
         peer.on('connection', (conn) => {
             conn.on('data', (data) => {
                 console.log(data)
             });
         });
     } else if (localStorage.getItem('sharedConsole') == 'client') {
+        console.log('open as client')
         const peerId = 'ganrobotconsole';
         const conn = peer.connect(peerId);
 
@@ -52,15 +50,15 @@ peer.on('open', (id) => {
         }
         var oldlog = console.log
         console.log = function (...args) {
-            oldlog(args)
             args.forEach(element => {
                 conn.send(compute(element))
             });
+            oldlog(args)
         }
         var olderror = console.error
         console.error = function (...args) {
-            olderror(error)
             conn.send(args.toString())
+            olderror(error)
         }
         conn.on('data', (data) => {
             displayMessage(message)
