@@ -46,10 +46,6 @@ document.getElementById('cube-view').onload = function () {
         function getIframeLogs() {
             return logs;
         }
-
-        setTimeout(() => {
-            console.log('Captured logs from iframe:', getIframeLogs());
-        }, 5000);
     }
 }
 

@@ -9,10 +9,10 @@ if (localStorage.getItem('sharedConsole') == 'server') {
 
 peer.on('open', (id) => {
     if (localStorage.getItem('sharedConsole') == 'server') {
-        console.log('open as client')
+        console.log('open as server')
         peer.on('connection', (conn) => {
+            console.log('got a connection')
             conn.on('data', (data) => {
-                console.log('got')
                 console.log(data)
             });
         });
