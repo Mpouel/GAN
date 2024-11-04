@@ -6,6 +6,8 @@ if (localStorage.getItem('sharedConsole') == 'server') {
 } else if (localStorage.getItem('sharedConsole') == 'client') {
     var peer = new Peer();
 }
+window.peer = peer
+console.log(peer)
 
 peer.on('open', (id) => {
     if (localStorage.getItem('sharedConsole') == 'server') {
@@ -20,48 +22,49 @@ peer.on('open', (id) => {
         console.log('open as client')
         const peerId = 'ganrobotconsole';
         const conn = peer.connect(peerId);
+        console.log('connecting to server')
 
         conn.on('open', () => {
             console.log('connected to server')
             displayMessage('Connected to peer: ' + peerId, 'log');
             conn.send('Connected to console sharing');
-        });
-        function compute(...args) {
-            var ret = []
-            args.forEach(element => {
-                if (typeof element === "string") {
-                    var content = {
-                        strings: element
-                    };
-                }
-                if (typeof element === "number") {
-                    var content = {
-                        numbers: element
-                    };
-                }
-                if (Array.isArray(element)) {
-                    var content = {
-                        arrays: element
-                    };
-                }
-                ret.push(content)
+            function compute(...args) {
+                var ret = []
+                args.forEach(element => {
+                    if (typeof element === "string") {
+                        var content = {
+                            strings: element
+                        };
+                    }
+                    if (typeof element === "number") {
+                        var content = {
+                            numbers: element
+                        };
+                    }
+                    if (Array.isArray(element)) {
+                        var content = {
+                            arrays: element
+                        };
+                    }
+                    ret.push(content)
+                });
+                return ret
+            }
+            var oldlog = console.log
+            console.log = function (...args) {
+                args.forEach(element => {
+                    conn.send(compute(element))
+                });
+                oldlog(args)
+            }
+            var olderror = console.error
+            console.error = function (...args) {
+                conn.send(args.toString())
+                olderror(error)
+            }
+            conn.on('data', (data) => {
+                displayMessage(message)
             });
-            return ret
-        }
-        var oldlog = console.log
-        console.log = function (...args) {
-            args.forEach(element => {
-                conn.send(compute(element))
-            });
-            oldlog(args)
-        }
-        var olderror = console.error
-        console.error = function (...args) {
-            conn.send(args.toString())
-            olderror(error)
-        }
-        conn.on('data', (data) => {
-            displayMessage(message)
         });
     }
 
