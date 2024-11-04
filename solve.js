@@ -38,7 +38,6 @@ document.getElementById('cube-view').onload = function () {
                     const move = args[1].move;
                     moves.push(move);
                     console.log(move);
-                    console.log(moves);
                 }
             }
         }
@@ -49,8 +48,8 @@ document.getElementById('cube-view').onload = function () {
     }
 }
 
-async function send() {
-    let rmov = ""
+let rmov = ""
+function send() {
     let rmoves = moves.reverse()
     if (rmoves.length > 0) {
         rmoves = moves.reverse()
@@ -96,7 +95,7 @@ async function send() {
                 default:
                     console.log("Invalid switch / case", rmove, rmoves)
             };
-            console.log("Move:", rmov)
+            console.log("Move:", rmov);
             move(rmov);
         });
     }
@@ -146,7 +145,10 @@ async function move(mov) {
         default:
             console.log("Invalid switch / case", rmove, rmoves)
     }
-    setTimeout(() => {clr_reset();console.log("reset");}, 1000);
+    setTimeout(() => {
+        clr_reset();
+        console.log("reset");
+    }, 1000);
 }
 
 // Colors variables
