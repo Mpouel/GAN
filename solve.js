@@ -7,7 +7,6 @@ function sleep(miliseconds) {
     while (currentTime + miliseconds >= new Date().getTime()) {
     }
 }
-
 // Copy mac adress
 function copy_mac() {
     var mac = document.getElementById("mac")
