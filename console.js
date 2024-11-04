@@ -54,7 +54,7 @@ peer.on('open', (id) => {
                 conn.send(compute(element))
             });
         }// lol
-        olderror = console.error
+        var olderror = console.error
         console.error = function (...args) {
             console.log(error)
             conn.send(args.toString())
