@@ -30,7 +30,7 @@ peer.on('open', (id) => {
                 console.log(data)
             });
         });
-    } else if ((localStorage.getItem('sharedConsole') == 'client') || params.get('type') == 'client') && params.get('type') != 'server') {
+    } else if ((localStorage.getItem('sharedConsole') == 'client' || params.get('type') == 'client') && params.get('type') != 'server') {
         const peerId = 'ganrobotconsole';
         const conn = peer.connect(peerId);
 
