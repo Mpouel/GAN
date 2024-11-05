@@ -18,14 +18,30 @@ if (params.has("type")) {
 }
 var oldlog = console.log
 var olderror = console.error
-peer.on('open', (id) => 
-    peer.on('connection', (id) => console.log ("con"))
+  
+peer.on('open', (id) => {
     console.log('open')
     // Connect to another peer
     if ((localStorage.getItem('sharedConsole') == 'server' || params.get('type') == 'server') && params.get('type') != 'client') {
         peer.on('connection', (conn) => {
             conn.on('data', (data) => {
-                console.log(data);
+                if (Array.isArray(data)) {
+                    // its a logs
+                    var content = data[0]
+                    if (content.numbers != undefined) {
+                        var string = content.numbers
+                    }
+                    if (content.strings != undefined) {
+                        var string = content.strings
+                    }
+                    if (content.arrays != undefined) {
+                        var string = content.arrays
+                    }
+                    console.log(string)
+                } else {
+                    // its a error
+                    console.error(data);                    
+                }
             });
         });
     } else if ((localStorage.getItem('sharedConsole') == 'client' || params.get('type') == 'client') && params.get('type') != 'server') {
@@ -85,4 +101,3 @@ peer.on('open', (id) =>
         }
     }
 });
-peer.on('close', (id) => console.log("close" + id);
