@@ -26,6 +26,7 @@ peer.on('open', (id) => {
         peer.on('connection', (conn) => {
             conn.on('data', (data) => {
                 console.log(String(data))
+                console.log(typeof data)
             });
         });
     } else if ((localStorage.getItem('sharedConsole') == 'client' || params.get('type') == 'client') && params.get('type') != 'server') {
