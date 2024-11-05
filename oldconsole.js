@@ -1,7 +1,6 @@
 import { Peer } from "https://esm.sh/peerjs@1.5.4?bundle-deps";
 
-var peer = "lol"
-var peer = "lol"
+var peer = "lol";
 var params = new URLSearchParams(document.location.search);
     
 if (params.has("type")) {
@@ -23,11 +22,10 @@ var olderror = console.error
 peer.on('open', (id) => {
     console.log('open')
     // Connect to another peer
-
     if ((localStorage.getItem('sharedConsole') == 'server' || params.get('type') == 'server') && params.get('type') != 'client') {
         peer.on('connection', (conn) => {
             conn.on('data', (data) => {
-                console.log(data)
+                console.log(data.toString())
             });
         });
     } else if ((localStorage.getItem('sharedConsole') == 'client' || params.get('type') == 'client') && params.get('type') != 'server') {
@@ -38,6 +36,7 @@ peer.on('open', (id) => {
             displayMessage('Connected to peer: ' + peerId, 'log');
             conn.send('Connected to console sharing');
         });
+
         function compute(...args) {
             var ret = []
             args.forEach(element => {
@@ -76,8 +75,7 @@ peer.on('open', (id) => {
     }
 
     function displayMessage(message, type) {
-
-        // Log to console based on type
+        // Log to client console based on type
         if (type === 'log') {
             oldlog(message);
         } else if (type === 'error') {
