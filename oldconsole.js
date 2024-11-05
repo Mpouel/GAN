@@ -61,13 +61,13 @@ peer.on('open', (id) => {
             return ret
         }
         console.log = function (...args) {
-            console.log(args)
+            displayMessage(args,'log')
             args.forEach(element => {
                 conn.send(compute(element))
             });
         }
         console.error = function (...args) {
-            console.log(args)
+            displayMessage(args,'error')
             conn.send(args.toString())
         }
         conn.on('data', (data) => {
