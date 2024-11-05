@@ -1,10 +1,21 @@
 import { Peer } from "https://esm.sh/peerjs@1.5.4?bundle-deps";
 
 var peer = "lol"
-if (localStorage.getItem('sharedConsole') == 'server') {
-    var peer = new Peer('ganrobotconsole');
-} else if (localStorage.getItem('sharedConsole') == 'client') {
-    var peer = new Peer();
+var peer = "lol"
+var params = new URLSearchParams(document.location.search);
+    
+if (params.has("type")) {
+    if (parms.get('type') == 'server') {
+        var peer = new Peer('ganrobotconsole');
+    } else if (params.get('type') == 'client') {
+        var peer = new Peer();
+    }
+} else {
+    if (localStorage.getItem('sharedConsole') == 'server') {
+        var peer = new Peer('ganrobotconsole');
+    } else if (localStorage.getItem('sharedConsole') == 'client') {
+        var peer = new Peer();
+    }
 }
 var oldlog = console.log
 var olderror = console.error
