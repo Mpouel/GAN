@@ -61,10 +61,10 @@ peer.on('open', (id) => {
             var olderror = console.error
             console.error = function (...args) {
                 conn.send(args.toString())
-                olderror(error)
+                olderror(args.toString()) // ()
             }
             conn.on('data', (data) => {
-                displayMessage(data)
+                displayMessage(data, "log") // (data, "log")?
             });
         });
     }
