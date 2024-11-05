@@ -5,7 +5,7 @@ var peer = "lol"
 var params = new URLSearchParams(document.location.search);
     
 if (params.has("type")) {
-    if (parms.get('type') == 'server') {
+    if (params.get('type') == 'server') {
         var peer = new Peer('ganrobotconsole');
     } else if (params.get('type') == 'client') {
         var peer = new Peer();
