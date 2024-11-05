@@ -27,7 +27,6 @@ peer.on('open', (id) => {
         peer.on('connection', (conn) => {
             conn.on('data', (data) => {
                 if (Array.isArray(data)) {
-                    // its a logs
                     var content = data[0]
                     if (content.numbers != undefined) {
                         var string = content.numbers
@@ -40,7 +39,6 @@ peer.on('open', (id) => {
                     }
                     console.log(string)
                 } else {
-                    // its a error
                     console.error(data);                    
                 }
             });
@@ -102,3 +100,5 @@ peer.on('open', (id) => {
         }
     }
 });
+
+window.onbeforeunload = function ()  {peer.destroy()}
