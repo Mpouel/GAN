@@ -19,7 +19,7 @@ if (params.has("type")) {
 var oldlog = console.log
 var olderror = console.error
 peer.on('open', (id) => 
-    peer.on('connection' => {console.log ("con")})
+    peer.on('connection', (id) => console.log ("con"))
     console.log('open')
     // Connect to another peer
     if ((localStorage.getItem('sharedConsole') == 'server' || params.get('type') == 'server') && params.get('type') != 'client') {
