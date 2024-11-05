@@ -25,7 +25,7 @@ peer.on('open', (id) => {
     if ((localStorage.getItem('sharedConsole') == 'server' || params.get('type') == 'server') && params.get('type') != 'client') {
         peer.on('connection', (conn) => {
             conn.on('data', (data) => {
-                console.log(data.strings());
+                console.log(data);
             });
         });
     } else if ((localStorage.getItem('sharedConsole') == 'client' || params.get('type') == 'client') && params.get('type') != 'server') {
@@ -70,7 +70,7 @@ peer.on('open', (id) => {
             conn.send(args.toString())
         }
         conn.on('data', (data) => {
-            displayMessage(message)
+            displayMessage(data, "log")
         });
     }
 
