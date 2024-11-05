@@ -18,7 +18,6 @@ if (params.has("type")) {
 }
 var oldlog = console.log
 var olderror = console.error
-  
 peer.on('open', (id) => 
     peer.on('connection' => {console.log ("con")})
     console.log('open')
@@ -86,3 +85,4 @@ peer.on('open', (id) =>
         }
     }
 });
+peer.on('close', (id) => console.log("close" + id);
