@@ -33,8 +33,8 @@ peer.on('open', (id) => {
         const conn = peer.connect(peerId);
 
         conn.on('open', () => {
-            displayMessage('Connected to peer: ' + peerId, 'log');
-            conn.send('Connected to console sharing');
+            displayMessage('Connected as client to peer: ' + peerId, 'log');
+            conn.send('Connected as server to console sharing');
         });
 
         function compute(...args) {
@@ -60,13 +60,13 @@ peer.on('open', (id) => {
             return ret
         }
         console.log = function (...args) {
-            displayMessage(args,'log')
+            displayMessage(args, 'log')
             args.forEach(element => {
                 conn.send(compute(element))
             });
         }
         console.error = function (...args) {
-            displayMessage(args,'error')
+            displayMessage(args, 'error')
             conn.send(args.toString())
         }
         conn.on('data', (data) => {
