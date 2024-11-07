@@ -8,11 +8,10 @@ async function sleep(miliseconds) {
 }
 
 const moves = [];
+const iframeWindow = document.getElementById('cube-view').contentWindow;
 // Wait for the cube iframe to load
 document.getElementById('cube-view').onload = function () {
-    // Access the iframe's window
-    const iframeWindow = document.getElementById('cube-view').contentWindow;
-
+    log_i()
     const prompt = iframeWindow.prompt;
     const mac = 'AB:12:34:60:7E:DA';
     iframeWindow.prompt = function (...args) {
@@ -30,9 +29,9 @@ document.getElementById('cube-view').onload = function () {
                     const move = args[1].move;
                     moves.push(move);
                     console.log(move);
+                    log_i()
                 }
             }
-            console.log("ar" + args)
         }
 
         function getIframeLogs() {
@@ -56,6 +55,10 @@ function send() {
     else {
         console.warn("No moves")
     }
+}
+
+function log_i() {  
+    console.log(iframeWindow.i);
 }
 
 async function lol(movl) {
