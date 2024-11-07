@@ -29,7 +29,10 @@ document.getElementById('cube-view').onload = function () {
                     const move = args[1].move;
                     moves.push(move);
                     console.log(move);
-                    log_i()
+                }
+                if (args[1].type == "FACELETS") {
+                    const facelets = args[1].facelets;
+                    console.log(facelets);
                 }
             }
         }
@@ -55,10 +58,6 @@ function send() {
     else {
         console.warn("No moves")
     }
-}
-
-function log_i() {  
-    console.log(iframeWindow.i);
 }
 
 async function lol(movl) {
@@ -106,7 +105,6 @@ async function lol(movl) {
     await move(rmov);
     await sleep2(1000);
 }
-
 
 async function move(mov) {
     switch (mov) {
