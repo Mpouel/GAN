@@ -1,18 +1,10 @@
 async function sleep2(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-function sleep(miliseconds) {
-    var currentTime = new Date().getTime();
- 
-    while (currentTime + miliseconds >= new Date().getTime()) {
+async function sleep(miliseconds) {
+    var start = new Date();
+    while (start + miliseconds >= new Date().getTime()) {
     }
-}
-// Copy mac adress
-function copy_mac() {
-    var mac = document.getElementById("mac")
-    mac.select();
-    mac.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(mac.innerText);
 }
 
 const moves = [];
@@ -51,6 +43,7 @@ document.getElementById('cube-view').onload = function () {
 let rmov = ""
 let rmoves = moves.reverse()
 function send() {
+    var t = 1;
     rmoves = moves.reverse()
     if (rmoves.length > 0) {
         rmoves = moves.reverse()
@@ -98,7 +91,8 @@ function send() {
             };
             console.log("Move:", rmov);
             move(rmov);
-            setTimeout(console.log("ls"), 1000)
+            setTimeout(console.log("ls"), Number(1000 * t))
+            t += 1;
         });
     }
     else {
@@ -147,10 +141,9 @@ async function move(mov) {
         default:
             console.log("Invalid switch / case", rmove, rmoves)
     }
-    setTimeout(() => {
-        clr_reset();
-        console.log("reset");
-    }, 1000);
+    sleep(1000)
+    await clr_reset();
+    console.log("reset");
 }
 
 // Colors variables
