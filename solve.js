@@ -100,7 +100,7 @@ async function lol(movl) {
     };
     console.log("Move:", rmov);
     await move(rmov);
-    await sleep(1000);
+    await sleep2(1000);
 }
 
 
@@ -145,8 +145,8 @@ async function move(mov) {
         default:
             console.log("Invalid switch / case", rmove, rmoves)
     }
-    await sleep(1000)
-    await clr_reset();
+    await sleep2(1000);
+    clr_reset();
     console.log("reset");
 }
 
