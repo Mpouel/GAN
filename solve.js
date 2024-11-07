@@ -32,6 +32,7 @@ document.getElementById('cube-view').onload = function () {
                     console.log(move);
                 }
             }
+            console.log("ar" + args)
         }
 
         function getIframeLogs() {
