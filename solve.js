@@ -22,6 +22,9 @@ document.getElementById('cube-view').onload = function () {
     if (iframeWindow) {
         const originalLog = iframeWindow.console.log;
         const logs = [];
+        iframeWindow.handleFaceletsEvent = function (...args) {
+            console.log(args)
+        }
         iframeWindow.console.log = function (...args) {
             logs.push(args);
             if (args[1] != undefined) {
