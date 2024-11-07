@@ -49,7 +49,7 @@ function send() {
     if (rmoves.length > 0) {
         rmoves = moves.reverse()
         rmoves.forEach(mov => {
-            if (r == true) {
+            while (r == true) {
                 // Set rmov to mov inverted
                 switch (mov) {
                     case "R":
@@ -95,8 +95,6 @@ function send() {
                 move(rmov);
                 t += 1;
                 r = false;
-            }
-            else {
                 setTimeout(r = true, 1000);
             }
         });
