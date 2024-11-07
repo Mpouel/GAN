@@ -33,10 +33,6 @@ document.getElementById('cube-view').onload = function () {
                     moves.push(move);
                     console.log(move);
                 }
-                if (args[1].type == "FACELETS") {
-                    const facelets = args[1].facelets;
-                    console.log(facelets);
-                }
             }
         }
 
