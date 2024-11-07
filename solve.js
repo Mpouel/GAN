@@ -43,56 +43,62 @@ document.getElementById('cube-view').onload = function () {
 let rmov = ""
 let rmoves = moves.reverse()
 function send() {
+    var r = true
     var t = 1;
     rmoves = moves.reverse()
     if (rmoves.length > 0) {
         rmoves = moves.reverse()
         rmoves.forEach(mov => {
-            // Set rmov to mov inverted
-            switch (mov) {
-                case "R":
-                    rmov = "R'"
-                    break;
-                case "R'":
-                    rmov = "R"
-                    break;
-                case "F":
-                    rmov = "F'"
-                    break;
-                case "F'":
-                    rmov = "F"
-                    break;
-                case "L":
-                    rmov = "L'"
-                    break;
-                case "L'":
-                    rmov = "L"
-                    break;
-                case "B":
-                    rmov = "B'"
-                    break;
-                case "B'":
-                    rmov = "B"
-                    break;
-                case "D":
-                    rmov = "D'"
-                    break;
-                case "D'":
-                    rmov = "D"
-                    break
-                case "U":
-                    rmov = "U'"
-                    break;
-                case "U'":
-                    rmov = "U"
-                    break
-                default:
-                    console.log("Invalid switch / case", rmove, rmoves)
-            };
-            console.log("Move:", rmov);
-            move(rmov);
-            setTimeout(console.log("ls"), Number(1000 * t))
-            t += 1;
+            if (r == true) {
+                // Set rmov to mov inverted
+                switch (mov) {
+                    case "R":
+                        rmov = "R'"
+                        break;
+                    case "R'":
+                        rmov = "R"
+                        break;
+                    case "F":
+                        rmov = "F'"
+                        break;
+                    case "F'":
+                        rmov = "F"
+                        break;
+                    case "L":
+                        rmov = "L'"
+                        break;
+                    case "L'":
+                        rmov = "L"
+                        break;
+                    case "B":
+                        rmov = "B'"
+                        break;
+                    case "B'":
+                        rmov = "B"
+                        break;
+                    case "D":
+                        rmov = "D'"
+                        break;
+                    case "D'":
+                        rmov = "D"
+                        break
+                    case "U":
+                        rmov = "U'"
+                        break;
+                    case "U'":
+                        rmov = "U"
+                        break
+                    default:
+                        console.log("Invalid switch / case", rmove, rmoves)
+                };
+                console.log("Move:", rmov);
+                move(rmov);
+                t += 1;
+                r = false;
+            }
+            else {
+                setTimeout(r = true, 1000);
+            }
         });
     }
     else {
