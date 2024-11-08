@@ -11,11 +11,10 @@ const moves = [];
 const iframeWindow = document.getElementById('cube-view').contentWindow;
 // Wait for the cube iframe to load
 document.getElementById('cube-view').onload = function () {
-    log_i()
     const prompt = iframeWindow.prompt;
     const mac = 'AB:12:34:60:7E:DA';
     iframeWindow.prompt = function (...args) {
-        console.log(...args)
+        console.log(args);
         return mac
     };
 
