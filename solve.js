@@ -7,7 +7,7 @@ async function sleep(miliseconds) {
     }
 }
 
-const moves = [];
+var moves = [];
 const iframeWindow = document.getElementById('cube-view').contentWindow;
 // Wait for the cube iframe to load
 document.getElementById('cube-view').onload = function () {

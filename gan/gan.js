@@ -4,3 +4,7 @@ console.log = function (...args) {
         console.log(facelets);
     }
 }
+
+function reset() {
+    console.log('Reset state')
+}
