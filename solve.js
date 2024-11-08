@@ -29,13 +29,15 @@ document.getElementById('cube-view').onload = function () {
             if (args[1] != undefined) {
                 if (args[1].type == "MOVE") {
                     const move = args[1].move;
+                    const facelets = args[1].facelets;
                     moves.push(move);
-                    console.log(move);
+                    console.log(move + "f: " + facelets);
                 }
             }
             else if (args == "Reset state") {
                 moves.length = 0;
-                console.log("Reset moves");
+                console.log("Reset state");
+                // solved() // for after
             }
         }
 
