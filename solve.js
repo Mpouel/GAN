@@ -32,7 +32,10 @@ document.getElementById('cube-view').onload = function () {
                     moves.push(move);
                     console.log(move);
                 }
-                else if (args == "Reset state") {moves = [];}
+            }
+            else if (args == "Reset state") {
+                moves.length = 0;
+                console.log("Reset moves");
             }
         }
 
