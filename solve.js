@@ -32,6 +32,7 @@ document.getElementById('cube-view').onload = function () {
                     moves.push(move);
                     console.log(move);
                 }
+                else if (args == "Reset state") {moves = [];}
             }
         }
 
