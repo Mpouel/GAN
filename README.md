@@ -13,8 +13,9 @@
 - GAN356 i 3
 
 ### Links:
- - Live version: [robotganev3.netlify.app](https://robotganev3.netlify.app)
+- Live version: [robotganev3.netlify.app](https://robotganev3.netlify.app)
 - GAN bluetooth module docs: [gan.module.docs.com](https://gan.module.docs.com)
 - Original repo: [github.com/afedotov/gan-web-bluetooth](https://github.com/afedotov/gan-web-bluetooth)
+- 
 
 ### 

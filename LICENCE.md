@@ -1,2 +1,2 @@
 # Copyright
-## THAT'S IT.
+## Licence valid.
