@@ -1,5 +1,11 @@
-# GAN Cube Web viewer
-##### *Made in: TypeScript, JavaScript, HTML, CSS*
+# GAN Cube Web viewer with EV3 compatibility
+
+![Static Badge](https://img.shields.io/badge/TS%2C%20JS%2C%20HTML%2C%20CSS-blue?style=for-the-badge&label=Made%20in%3A%20)
+
+### Contributors:
+- ![Static Badge](https://img.shields.io/badge/GeekCoder-403-skyblue?style=flat-square)
+- ![Static Badge](https://img.shields.io/badge/franck-403-red?style=flat-square)
+
 
 ### Compatible device:
 - GAN12 ui
