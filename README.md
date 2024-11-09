@@ -20,10 +20,10 @@
 - EV3 color code diagram: 
 ```mermaid
 stateDiagram-v2
-    [*] --> Still
-    Still --> [*]
-    Still --> Moving
-    Moving --> Still
+    Move --> Still
+    Move --> [*]
+    Move --> Moving
+    Move --> Still
     Moving --> Crash
     Crash --> [*]
 ```
