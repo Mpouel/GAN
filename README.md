@@ -21,11 +21,6 @@
 ```mermaid
 Color code;
     Move --> Up;
-    Move --> Right;
-    Move --> Front;
-    Move --> Left;
-    Move --> Down;
-    Move --> Back;
 ```
 
 ### License:
