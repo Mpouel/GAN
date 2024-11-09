@@ -20,14 +20,14 @@
 - EV3 color code diagram: 
 ```mermaid
 Color code;
-    Move-->Up;
-    Move-->Right;
-    Move-->Front;
-    Move-->Left;
-    Move-->Down;
-    Move-->Back;
-    Modifier-->*none*;
-    Modifier-->';
+    Move --> Up;
+    Move --> Right;
+    Move --> Front;
+    Move --> Left;
+    Move --> Down;
+    Move --> Back;
+    Modifier --> *none*;
+    Modifier --> ';
 ```
 
 ### License:
