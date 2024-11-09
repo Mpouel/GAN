@@ -19,8 +19,13 @@
 - Original repo: [github.com/afedotov/gan-web-bluetooth](https://github.com/afedotov/gan-web-bluetooth)
 - EV3 color code diagram: 
 ```mermaid
-Color code;
-    Move --> Up;
+stateDiagram-v2
+    [*] --> Still
+    Still --> [*]
+    Still --> Moving
+    Moving --> Still
+    Moving --> Crash
+    Crash --> [*]
 ```
 
 ### License:
