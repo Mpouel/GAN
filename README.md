@@ -26,8 +26,6 @@ Color code;
     Move --> Left;
     Move --> Down;
     Move --> Back;
-    Modifier --> *none*;
-    Modifier --> ';
 ```
 
 ### License:
