@@ -8,7 +8,7 @@
 ![GitHub Repo viewers](https://img.shields.io/github/watchers/mpouel/gan?style=flat-square)
 
 ### Website:
-[robotganev3.netlify.app](https://robotganev3.netlify.app) ![Website](https://img.shields.io/website?url=https%3A%2F%2Frobotganev3.netlify.app&style=flat-square) 
+![Website](https://img.shields.io/website?url=https%3A%2F%2Frobotganev3.netlify.app&style=flat-square) [robotganev3.netlify.app](https://robotganev3.netlify.app) 
 
 ### Features:
 - Realtime visualisatio of the cube with the render of [Three.js](https://threejs.org/)
@@ -17,16 +17,6 @@
 
 ### Docs:
 - Original repo: [github.com/afedotov/gan-web-bluetooth](https://github.com/afedotov/gan-web-bluetooth)
-- EV3 color code diagram: 
-```mermaid
-stateDiagram-v2
-    Move --> Still
-    Move --> [*]
-    Move --> Moving
-    Move --> Still
-    Moving --> Crash
-    Crash --> [*]
-```
 
 ### License:
 All **open source** project.
@@ -56,3 +46,19 @@ All **open source** project.
 |-------------------|----------|-----------|-----------------------------------------------|
 | peer.js           | Stable   | Library   | Console sharing                               |
 | gan-web-bluetooth | Stable   | Package   | Comunications with the cube and data transfer |
+
+### EV3 color code:
+| Symbol | Move          | Color name | Color modifier |
+|--------|---------------|------------|----------------|
+| U      | Up            | 🟣 Purple  | 🔴 Red         |
+| U'     | Up prime      | 🟣 Purple  | 🔵 Blue        |
+| R      | Right         | 🔴 Red     | 🔴 Red         |
+| R'     | Right Prime   | 🔴 Red     | 🔵 Blue        |
+| F      | Front         | 🔵 Blue    | 🔴 Red         |
+| F'     | Front prime   | 🔵 Blue    | 🔵 Blue        |
+| L      | Left          | 🟢 Green   | 🔴 Red         |
+| L'     | Left prime    | 🟢 Green   | 🔵  Blue       |
+| D      | Down          | 🟤 Brown   | 🔴 Red         |
+| D'     | Down prime    | 🟤 Brown   | 🔵 Blue        |
+| B      | Back          | 🟡 Yellow  | 🔴 Red         |
+| B'     | Back prime    | 🟡 Yellow  | 🔵 Blue        |
