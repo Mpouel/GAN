@@ -1,2 +1,1 @@
-# Copyright
-## Licence valid.
+# Open source 😃
