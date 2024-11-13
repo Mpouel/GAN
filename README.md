@@ -1,5 +1,4 @@
 # GAN Cube Web viewer
-#### LEGO Mindstorm EV3 compatibility
 
 ![Static Badge](https://img.shields.io/badge/JS%2C%20HTML%2C%20CSS-orangered?style=flat-square&label=made%20in)  ¯ 
 ![GitHub Created At](https://img.shields.io/github/created-at/Mpouel/gan?style=flat-square)
@@ -8,16 +7,17 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/mpouel/gan?style=flat-square)
 ![GitHub Repo viewers](https://img.shields.io/github/watchers/mpouel/gan?style=flat-square)
 
+This project is based on [afedotov/gan-web-bluetooth](https://github.com/afedotov/gan-web-bluetooth) paka
+LEGO Mindstorm EV3 compatibility.
+
 ### Website:
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Frobotganev3.netlify.app&style=flat-square
 ) [robotganev3.netlify.app](https://robotganev3.netlify.app) 
 
 ### Features:
-- Realtime visualisatio of the cube with the render of [Three.js](https://threejs.org/)
+- Realtime render of the cube with the render of [Three.js](https://threejs.org/)
+- LEGO Mindstorm EV3 compatibility
 - Gyro
-
-### Docs:
-- Original repo: [github.com/afedotov/gan-web-bluetooth](https://github.com/afedotov/gan-web-bluetooth)
 
 ### License:
 All **open source** project.
