@@ -55,7 +55,7 @@ peer.on('open', (id) => {
 
         conn.on('open', () => {
             displayMessage('Connected as client to peer: ' + peerId, 'log');
-            conn.send('Connected as server to console sharing');
+            conn.send('Connected as server to peer' + peerId);
         });
 
         function compute(...args) {
