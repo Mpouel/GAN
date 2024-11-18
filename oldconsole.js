@@ -19,7 +19,7 @@ if (params.has("type")) {
     }
 }
 if (params.has("peerid")) {
-    peerId = params.get("peerid")
+    var peerId = params.get("peerid")
 }
 
 var oldlog = console.log
