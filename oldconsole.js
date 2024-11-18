@@ -46,7 +46,7 @@ peer.on('open', (id) => {
                 } else if (!content == "Connected as server to console sharing") {    
                     console.error(data);
                 } else {
-                    console.log("Connected as server to peer: " + content.replaceAll("Connected as server to peer: ", ""))
+                    console.log("Connected as server to peer: " + data[0].replaceAll("Connected as server to peer: ", ""))
                 }
             });
         });
