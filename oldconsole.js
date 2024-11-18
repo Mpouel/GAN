@@ -1,22 +1,34 @@
 // https://prod.liveshare.vsengsaas.visualstudio.com/join?BA39A58F31D67437D45A1273BD8FA40F968E
 import { Peer } from "https://esm.sh/peerjs@1.5.4?bundle-deps";
 
-var peer = "lol";
+var peer = "No peer"
+var peerId = 'ganrobotconsole';
 var params = new URLSearchParams(document.location.search);
     
 if (params.has("type")) {
     if (params.get('type') == 'server') {
-        var peer = new Peer('ganrobotconsole');
+        server()
     } else if (params.get('type') == 'client') {
-        var peer = new Peer();
+        client()
     }
 } else {
     if (localStorage.getItem('sharedConsole') == 'server') {
-        var peer = new Peer('ganrobotconsole');
+        server()
     } else if (localStorage.getItem('sharedConsole') == 'client') {
-        var peer = new Peer();
+        client()
     }
 }
+if (params.has("peerid")) {
+    peerId = params.get("peerid")
+}
+
+function server() {
+    var peer = new Peer(peerId);
+}
+function client() {
+    var peer = new Peer();
+}
+
 var oldlog = console.log
 var olderror = console.error
   
@@ -46,7 +58,6 @@ peer.on('open', (id) => {
             });
         });
     } else if ((localStorage.getItem('sharedConsole') == 'client' || params.get('type') == 'client') && params.get('type') != 'server') {
-        const peerId = 'ganrobotconsole';
         const conn = peer.connect(peerId);
 
         conn.on('open', () => {
