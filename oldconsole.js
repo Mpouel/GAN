@@ -46,7 +46,7 @@ peer.on('open', (id) => {
                 } else if (!content == "Connected as server to console sharing") {    
                     console.error(data);
                 } else {
-                    console.log("Connected as server to console sharing")
+                    console.log("Connected as server to peer: " + content.replaceAll("Connected as server to peer: ", ""))
                 }
             });
         });
@@ -55,7 +55,7 @@ peer.on('open', (id) => {
 
         conn.on('open', () => {
             displayMessage('Connected as client to peer: ' + peerId, 'log');
-            conn.send('Connected as server to peer' + peerId);
+            conn.send('Connected as server to peer: ' + peerId);
         });
 
         function compute(...args) {
