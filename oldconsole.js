@@ -4,7 +4,10 @@ import { Peer } from "https://esm.sh/peerjs@1.5.4?bundle-deps";
 var peer = "No peer"
 var peerId = 'ganrobotconsole';
 var params = new URLSearchParams(document.location.search);
-    
+
+if (params.has("peerid")) {
+    var peerId = params.get("peerid")
+}
 if (params.has("type")) {
     if (params.get('type') == 'server') {
         var peer = new Peer(peerId);
@@ -17,9 +20,6 @@ if (params.has("type")) {
     } else if (localStorage.getItem('sharedConsole') == 'client') {
         var peer = new Peer();
     }
-}
-if (params.has("peerid")) {
-    var peerId = params.get("peerid")
 }
 
 var oldlog = console.log
