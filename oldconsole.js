@@ -38,8 +38,10 @@ peer.on('open', (id) => {
                         var string = content.arrays
                     }
                     console.log(string)
+                } else if (!content == "Connected as server to console sharing") {    
+                    console.error(data);
                 } else {
-                    console.error(data);                    
+                    console.log("Connected as server to console sharing")
                 }
             });
         });
