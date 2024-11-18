@@ -7,26 +7,19 @@ var params = new URLSearchParams(document.location.search);
     
 if (params.has("type")) {
     if (params.get('type') == 'server') {
-        server()
+        var peer = new Peer(peerId);
     } else if (params.get('type') == 'client') {
-        client()
+        var peer = new Peer();
     }
 } else {
     if (localStorage.getItem('sharedConsole') == 'server') {
-        server()
+        var peer = new Peer(peerId);
     } else if (localStorage.getItem('sharedConsole') == 'client') {
-        client()
+        var peer = new Peer();
     }
 }
 if (params.has("peerid")) {
     peerId = params.get("peerid")
-}
-
-function server() {
-    var peer = new Peer(peerId);
-}
-function client() {
-    var peer = new Peer();
 }
 
 var oldlog = console.log
