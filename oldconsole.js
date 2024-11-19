@@ -1,110 +1,102 @@
-// https://prod.liveshare.vsengsaas.visualstudio.com/join?BA39A58F31D67437D45A1273BD8FA40F968E
+// Import the PeerJS library for peer-to-peer communication
 import { Peer } from "https://esm.sh/peerjs@1.5.4?bundle-deps";
 
-var peer = "No peer"
-var peerId = 'ganrobotconsole';
-var params = new URLSearchParams(document.location.search);
+// Default peer configuration
+let peer = "No peer";
+let peerId = "ganrobotconsole";
+const params = new URLSearchParams(document.location.search);
+let prPeerId = params.get("peerid"h);
 
+// Override peerId if specified in the URL query parameters
 if (params.has("peerid")) {
-    var peerId = params.get("peerid")
-}
-if (params.has("type")) {
-    if (params.get('type') == 'server') {
-        var peer = new Peer(peerId);
-    } else if (params.get('type') == 'client') {
-        var peer = new Peer();
-    }
-} else {
-    if (localStorage.getItem('sharedConsole') == 'server') {
-        var peer = new Peer(peerId);
-    } else if (localStorage.getItem('sharedConsole') == 'client') {
-        var peer = new Peer();
-    }
+    peerId = prPeerId;
 }
 
-var oldlog = console.log
-var olderror = console.error
-  
-peer.on('open', (id) => {
-    console.log('open')
-    // Connect to another peer
-    if ((localStorage.getItem('sharedConsole') == 'server' || params.get('type') == 'server') && params.get('type') != 'client') {
-        peer.on('connection', (conn) => {
-            conn.on('data', (data) => {
+// Determine peer type (server/client) from URL or local storage
+if (params.has("type")) {
+    peer = params.get("type") === "server" ? new Peer(peerId) : new Peer();
+} else {
+    const storedType = localStorage.getItem("sharedConsole");
+    peer = storedType === "server" ? new Peer(peerId) : new Peer();
+}
+
+// Backup default console methods for later use
+const oldLog = console.log;
+const oldError = console.error;
+
+// Event triggered when the peer connection is established
+peer.on("open", (id) => {
+    console.log("Peer connection open");
+
+    // Server behavior
+    if ((localStorage.getItem("sharedConsole") === "server" || params.get("type") === "server") && params.get("type") !== "client") {
+        peer.on("connection", (conn) => {
+            conn.on("data", (data) => {
                 if (Array.isArray(data)) {
-                    var content = data[0]
-                    if (content.numbers != undefined) {
-                        var string = content.numbers
-                    }
-                    if (content.strings != undefined) {
-                        var string = content.strings
-                    }
-                    if (content.arrays != undefined) {
-                        var string = content.arrays
-                    }
-                    console.log(string)
-                } else if (!content == "Connected as server to console sharing") {    
-                    console.error(data);
+                    const content = data[0];
+                    let message;
+                    
+                    if (content.numbers !== undefined) message = content.numbers;
+                    if (content.strings !== undefined) message = content.strings;
+                    if (content.arrays !== undefined) message = content.arrays;
+
+                    console.log(message);
+                } else if (data == prPeerId) {
+                    console.log("Connected as server to peer: " + prPeerId);
                 } else {
-                    console.log("Connected as server to peer: " + data[0].replaceAll("Connected as server to peer: ", ""))
+                    console.error(data);
                 }
             });
         });
-    } else if ((localStorage.getItem('sharedConsole') == 'client' || params.get('type') == 'client') && params.get('type') != 'server') {
+    }
+    // Client behavior
+    else if ((localStorage.getItem("sharedConsole") === "client" || params.get("type") === "client") && params.get("type") !== "server") {
         const conn = peer.connect(peerId);
 
-        conn.on('open', () => {
-            displayMessage('Connected as client to peer: ' + peerId, 'log');
-            conn.send('Connected as server to peer: ' + peerId);
+        conn.on("open", () => {
+            displayMessage("Connected as client to peer: ${peerId}", "log");
+            conn.send(peerId);
         });
 
+        // Function to format data for transmission
         function compute(...args) {
-            var ret = []
-            args.forEach(element => {
-                if (typeof element === "string") {
-                    var content = {
-                        strings: element
-                    };
-                }
-                if (typeof element === "number") {
-                    var content = {
-                        numbers: element
-                    };
-                }
-                if (Array.isArray(element)) {
-                    var content = {
-                        arrays: element
-                    };
-                }
-                ret.push(content)
-            });
-            return ret
+            return args.map((element) => {
+                if (typeof element === "string") return { strings: element };
+                if (typeof element === "number") return { numbers: element };
+                if (Array.isArray(element)) return { arrays: element };
+                return null;
+            }).filter(Boolean);
         }
+
+        // Override console methods to handle peer communication
         console.log = function (...args) {
-            displayMessage(args, 'log')
-            args.forEach(element => {
-                conn.send(compute(element))
-            });
-        }
+            displayMessage(args, "log");
+            args.forEach((element) => conn.send(compute(element)));
+        };
+
         console.error = function (...args) {
-            displayMessage(args, 'error')
-            conn.send(args.toString())
-        }
-        conn.on('data', (data) => {
-            displayMessage(data, "log")
+            displayMessage(args, "error");
+            conn.send(args.toString());
+        };
+
+        conn.on("data", (data) => {
+            displayMessage(data, "log");
         });
     }
 
+    // Helper function to display messages based on type
     function displayMessage(message, type) {
-        // Log to client console based on type
-        if (type === 'log') {
-            oldlog(message);
-        } else if (type === 'error') {
-            olderror(message);
+        if (type === "log") {
+            oldLog(message);
+        } else if (type === "error") {
+            oldError(message);
         } else {
-          oldlog(message)
+            oldLog(message);
         }
     }
 });
 
-window.onbeforeunload = function ()  {peer.destroy()}
+// Destroy peer on window close
+window.onbeforeunload = () => {
+    peer.destroy();
+};
