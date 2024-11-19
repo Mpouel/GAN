@@ -54,7 +54,7 @@ peer.on("open", (id) => {
         const conn = peer.connect(peerId);
 
         conn.on("open", () => {
-            displayMessage("Connected as client to peer: ${peerId}", "log");
+            displayMessage("Connected as client to peer: " + peerId, "log");
             conn.send(peerId);
         });
 
