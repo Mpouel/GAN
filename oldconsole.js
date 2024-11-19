@@ -5,7 +5,7 @@ import { Peer } from "https://esm.sh/peerjs@1.5.4?bundle-deps";
 let peer = "No peer";
 let peerId = "ganrobotconsole";
 const params = new URLSearchParams(document.location.search);
-let prPeerId = params.get("peerid"h);
+let prPeerId = params.get("peerid");
 
 // Override peerId if specified in the URL query parameters
 if (params.has("peerid")) {
