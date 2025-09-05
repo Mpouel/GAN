@@ -29,6 +29,7 @@ document.getElementById('cube-view').onload = function () {
             if (args[1] != undefined) {
                 if (args[1].type == "MOVE") {
                     const move = args[1].move;
+                    console.log(move)
                     moves.push(move);
                 }
             }
