@@ -23,11 +23,13 @@ let moves = [];
 
 function resetMoves() {
     moves = [];
+    console.log("Reset moves")
 }
 
 function getMoves() {
     let rMoves = reverseMoves(moves)
     navigator.clipboard.writeText(rMoves)
+    console.log("Copied moves: \n" + rMoves)
 }
 
 const iframeWindow = document.getElementById('cube-view').contentWindow;
