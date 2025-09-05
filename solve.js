@@ -7,7 +7,29 @@ async function sleep(miliseconds) {
     }
 }
 
-var moves = [];
+function reverseMoves(movs) {
+    return movs
+    .slice()
+    .reverse()
+    .map(move => {
+      if (move.endsWith("2")) return move;
+      if (move.endsWith("'")) return move.slice(0, -1);
+      return move + "'";
+    })
+    .join(" "); 
+}
+
+let moves = [];
+
+function resetMoves() {
+    moves = [];
+}
+
+function getMoves() {
+    let rMoves = reverseMoves(moves)
+    navigator.clipboard.writeText(rMoves)
+}
+
 const iframeWindow = document.getElementById('cube-view').contentWindow;
 // Wait for the cube iframe to load
 document.getElementById('cube-view').onload = function () {
@@ -21,9 +43,6 @@ document.getElementById('cube-view').onload = function () {
     if (iframeWindow) {
         const originalLog = iframeWindow.console.log;
         const logs = [];
-        iframeWindow.handleFaceletsEvent = function (...args) {
-            console.log(args)
-        }
         iframeWindow.console.log = function (...args) {
             logs.push(args);
             if (args[1] != undefined) {
@@ -96,10 +115,3 @@ betterFetch('solve.js', (data) => {
         });
     }, 5000)
 })
-
-function server() {
-    localStorage.setItem('sharedConsole', "server")
-}
-function client() {
-    localStorage.setItem('sharedConsole', "client")
-}
