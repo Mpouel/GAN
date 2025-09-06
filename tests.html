@@ -1,35 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CubeJS Solver Demo</title>
+    <title>Cube.js Demo</title>
 </head>
+
 <body>
-  <h1>CubeJS Solver Demo</h1>
+    <p id="status">Initialisation en cours...</p>
+    <button id="scramble" onclick="solved()">Générer un mélange</button>
+    <p id="result"></p>
 
-  <label>Scramble:</label>
-  <input id="scramble" value="R U R' U'">
-  <button onclick="solveCube()">Solve</button>
+    <script>
+        const Cube = require('cubejs');
 
-  <h2>Solution:</h2>
-  <pre id="solution"></pre>
+        Cube.initSolver();
 
-  <!-- ✅ Charger cubejs (UMD) -->
-  <script src="https://unpkg.com/cubejs/lib/cube.min.js"></script>
-  <script>
-    function solveCube() {
-      try {
-        const scramble = document.getElementById("scramble").value.trim();
-        const solution = cubejs.solve(scramble); // ✅ fonctionne avec UMD
-        document.getElementById("solution").textContent = solution;
-        navigator.clipboard.writeText(solution);
-        console.log("Scramble:", scramble);
-        console.log("Solution:", solution);
-      } catch (err) {
-        console.error("Erreur:", err);
-      }
-    }
-  </script>
+        function solved() {
+            Cube.move("U F R2 B' D2 L'");
+            let solution = Cube.solve();
+            document.getElementById('result');
+        }
+    </script>
 </body>
+
 </html>
