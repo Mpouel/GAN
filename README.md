@@ -7,8 +7,8 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/mpouel/gan?style=flat-square)
 ![GitHub Repo viewers](https://img.shields.io/github/watchers/mpouel/gan?style=flat-square)
 
-This project is based on [afedotov/gan-web-bluetooth](https://github.com/afedotov/gan-web-bluetooth) paka
-LEGO Mindstorm EV3 compatibility.
+This project is based on [afedotov/gan-web-bluetooth](https://github.com/afedotov/gan-web-bluetooth)
+LEGO Mindstorm EV3 and LEGO SPIKE Prime compatibility.
 
 ### Website:
 ![Website](https://img.shields.io/website?url=https%3A%2F%2Frobotganev3.netlify.app&style=flat-square
