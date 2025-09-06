@@ -12,8 +12,9 @@
     <iframe src="gan/" frameborder="0" class="cube-view" id="cube-view" allow="bluetooth"></iframe>
     <button id="getmoves" onclick="gm()">Get moves</button>
     <pre id="solution"></pre>
-    <script type="module">import { Cube } from 'https://cdn.jsdelivr.net/npm/cubejs@latest/dist/cube.min.js';
-
+    <script src="https://cdn.jsdelivr.net/npm/cubejs/lib/cube.min.js"></script>
+    <script>
+        let moves = [];
         function gm() {
             try {
                 if (typeof Cube === 'undefined') {
@@ -33,9 +34,9 @@
         }
 
         // Handle iframe logs (if you must)
-        document.getElementById('cube-view').onload = function() {
+        document.getElementById('cube-view').onload = function () {
             const iframeWindow = this.contentWindow;
-            iframeWindow.console.log = function(...args) {
+            iframeWindow.console.log = function (...args) {
                 if (args[1]?.type === "MOVE") {
                     moves.push(args[1].move);
                     console.log("Move detected:", args[1].move);
