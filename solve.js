@@ -1,5 +1,7 @@
 let moves = [];
 
+let cubejs = window.cubejs
+
 function solve(scramble) {
   cubejs.initSolver();
   const cube = cubejs();
