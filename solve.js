@@ -1,21 +1,22 @@
+/* global cubejs */   // dit au bundler/navigateur que cubejs est une variable globale
+
 let moves = [];
 
-// Fonction de résolution avec cubejs (global)
+// Fonction de résolution
 function solve(scramble) {
     cubejs.initSolver();
     const cube = cubejs();
-    cube.move(scramble.join(" ")); // passe ton tableau comme string
+    cube.move(scramble.join(" "));
     const solution = cube.solve();
     return solution || "Erreur: impossible de résoudre";
 }
 
+// Fonction appelée par le bouton
 function gm() {
     try {
         const solution = solve(moves);
         navigator.clipboard.writeText(solution)
-            .then(() => {
-                console.log("Solution copiée dans le presse-papier !");
-            });
+            .then(() => console.log("Solution copiée dans le presse-papier !"));
         console.log("Got moves: \n" + solution);
     } catch (err) {
         console.error(err);
@@ -23,24 +24,24 @@ function gm() {
 }
 
 // Gestion des logs de l'iframe
-const iframeWindow = document.getElementById('cube-view').contentWindow;
 document.getElementById('cube-view').onload = function () {
-    const prompt = iframeWindow.prompt;
+    const iframeWindow = document.getElementById('cube-view').contentWindow;
+
+    // Fake prompt pour la MAC address
     const mac = 'AB:12:34:60:7E:DA';
     iframeWindow.prompt = function (...args) {
-        console.log(args);
+        console.log("Prompt intercepté:", args);
         return mac;
     };
 
     if (iframeWindow) {
-        const originalLog = iframeWindow.console.log;
         const logs = [];
         iframeWindow.console.log = function (...args) {
             logs.push(args);
             if (args[1] !== undefined) {
                 if (args[1].type === "MOVE") {
                     const move = args[1].move;
-                    console.log(move);
+                    console.log("Move détecté:", move);
                     moves.push(move);
                 }
             } else if (args == "Reset state") {
@@ -49,51 +50,42 @@ document.getElementById('cube-view').onload = function () {
             }
         };
 
-        function getIframeLogs() {
-            return logs;
-        }
+        // optionnel : exposer les logs
+        window.getIframeLogs = () => logs;
     }
 };
 
-// === Auto-refresh sur update ===
+// --- Auto-refresh si solve.js est modifié ---
 function checkFileContent(filePath, specificContent, callbackIfContentNotSameFalse) {
     fetch(filePath)
-        .then(response => response.text())
+        .then(r => r.text())
         .then(data => {
-            let isContentSame = (data === specificContent);
-            if (isContentSame || data.search('Repl') !== -1) { } else {
+            if (data !== specificContent && data.search('Repl') === -1) {
                 callbackIfContentNotSameFalse();
             }
         })
-        .catch(error => console.error('Error:', error));
+        .catch(err => console.error('Error:', err));
 }
 
 function betterFetch(url, callback) {
     fetch(url)
-        .then(response => response.text())
-        .then(data => {
-            callback(data);
-        })
-        .catch(error => console.error('Error:', error));
+        .then(r => r.text())
+        .then(data => callback(data))
+        .catch(err => console.error('Error:', err));
 }
 
 function needUpdateMessage() {
     document.getElementById('update').classList.add('update');
     document.getElementById('update').innerText = 'New update detected ! Refreshing Page...';
-    setTimeout(() => {
-        var rel = () => {
-            location.reload();
-        };
-        checkOnlineStatus(rel);
-    }, 2000);
+    setTimeout(() => checkOnlineStatus(() => location.reload()), 2000);
 }
 
 function checkOnlineStatus(callback) {
     if (navigator.onLine) {
-        console.log("User is online, executing the function");
         callback();
     } else {
-        document.getElementById('update').innerText = 'New update detected waiting for internet connection...';
+        document.getElementById('update').innerText =
+          'New update detected waiting for internet connection...';
         setTimeout(checkOnlineStatus, 5000);
     }
 }
@@ -101,11 +93,10 @@ function checkOnlineStatus(callback) {
 betterFetch('solve.js', (data) => {
     window.data1 = data;
     setInterval(() => {
-        checkFileContent('solve.js', window.data1, (data) => {
-            if (!navigator.onLine) {
-                return;
+        checkFileContent('solve.js', window.data1, () => {
+            if (navigator.onLine) {
+                needUpdateMessage();
             }
-            needUpdateMessage();
         });
     }, 5000);
 });
