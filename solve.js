@@ -1,7 +1,5 @@
 let moves = [];
 
-let cubejs = window.cubejs
-
 async function solve(scramble) {
   const response = await fetch('https://cube.crider.co.uk/api.php', {
     method: 'POST',
