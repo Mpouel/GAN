@@ -1,35 +1,16 @@
-async function sleep2(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-async function sleep(miliseconds) {
-    var start = new Date();
-    while (start + miliseconds >= new Date().getTime()) {
-    }
-}
-
-function reverseMoves(movs) {
-    return movs
-    .slice()
-    .reverse()
-    .map(move => {
-      if (move.endsWith("2")) return move;
-      if (move.endsWith("'")) return move.slice(0, -1);
-      return move + "'";
-    })
-    .join(" "); 
-}
+import { solveScramble } from './rubik-solver-api.js';
 
 let moves = [];
 
-function resetMoves() {
-    moves = [];
-    console.log("Reset moves")
-}
-
-function getMoves() {
-    let rMoves = reverseMoves(moves)
-    navigator.clipboard.writeText(rMoves)
-    console.log("Copied moves: \n" + rMoves)
+async function getMoves() {
+    try {
+        const solution = await solveScramble(scramble);
+        console.log('Fastest solution:', solution);
+      } catch (err) {
+        console.error(err);
+      }
+    navigator.clipboard.writeText(solve)
+    console.log("Copied moves: \n" + solve)
 }
 
 const iframeWindow = document.getElementById('cube-view').contentWindow;
