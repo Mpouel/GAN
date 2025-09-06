@@ -16,7 +16,7 @@ LEGO Mindstorm EV3 and LEGO SPIKE Prime compatibility.
 
 ### Features:
 - Realtime render of the cube with the render of [Three.js](https://threejs.org/)
-- LEGO Mindstorm EV3 compatibility
+- LEGO Mindstorm EV3 and LEGO SPIKE Prime compatibility
 - Gyro
 
 ### License:
