@@ -2,7 +2,6 @@ import cubejs from "cubejs";
 
 cubejs.initSolver();
 
-
 let moves = [];
 
 async function solve(scramble) {

@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "cubejs": "^1.3.2"
+  }
+}
