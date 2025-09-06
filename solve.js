@@ -1,4 +1,4 @@
-import cubejs from "https://esm.sh/cubejs@4.0.0";
+import cubejs from "https://cdn.jsdelivr.net/npm/cubejs/lib/cube.min.js";
 
 let moves = [];
 
