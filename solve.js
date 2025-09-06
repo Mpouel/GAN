@@ -1,23 +1,8 @@
 let moves = [];
 
-async function solve(scramble) {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const apiUrl = 'https://cube.crider.co.uk/api.php';
-    const response = await fetch(proxyUrl + apiUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Origin': 'https://robotganev3.netlify.app',
-        },
-        body: `scramble=${encodeURIComponent(scramble)}&type=solution`
-    });
-    const solution = await response.text();
-    return solution;
-}
-
 function gm() {
     try {
-        const solution = solve(moves);
+        const solution = kociemba.solve(moves);
         navigator.clipboard.writeText(solution);
         console.log("Got moves:\n" + solution);
     } catch (err) {
