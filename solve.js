@@ -22,7 +22,7 @@ async function solve(scramble) {
 
 async function getMoves() {
     try {
-        const solution = await solve(scramble);
+        const solution = await solve(moves);
         navigator.clipboard.writeText(solution)
         console.log("Copied moves: \n" + solution)
       } catch (err) {
@@ -31,7 +31,6 @@ async function getMoves() {
 }
 
 const iframeWindow = document.getElementById('cube-view').contentWindow;
-// Wait for the cube iframe to load
 document.getElementById('cube-view').onload = function () {
     const prompt = iframeWindow.prompt;
     const mac = 'AB:12:34:60:7E:DA';
