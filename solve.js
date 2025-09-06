@@ -1,5 +1,6 @@
 let moves = [];
 
+// Function to solve the cube and display the solution
 function gm() {
     try {
         if (typeof Rubik === 'undefined') {
@@ -25,21 +26,27 @@ function gm() {
     }
 }
 
-window.addEventListener('message', function (event) {
+// Listen for messages from the iframe
+window.addEventListener('message', function(event) {
     if (event.data.type === "MOVE") {
         moves.push(event.data.move);
         console.log("Move detected:", event.data.move);
-    } else if (event.data === "Reset state") {
+    } else if (event.data === "Reset State") {
         moves = [];
-        console.log("Reset state");
+        console.log("Reset State");
+        document.getElementById("solution").textContent = "Moves will appear here.";
     } else if (event.data.type === "Get Moves") {
         gm();
         console.log("Got Moves");
     } else if (event.data === "Connect First") {
-        console.log("Connect first");
+        console.log("Connect First");
     }
 });
 
+// Attach the gm function to the button
+document.getElementById("getmoves").addEventListener("click", gm);
+
+// Optional: Auto-refresh logic
 let lastFileContent = '';
 function checkForUpdates() {
     fetch('solve.js')
@@ -56,3 +63,6 @@ function checkForUpdates() {
         })
         .catch(console.error);
 }
+
+// Uncomment to enable auto-refresh
+// setInterval(checkForUpdates, 30000);

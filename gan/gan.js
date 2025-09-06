@@ -2,14 +2,14 @@ function gm() {
     if (document.getElementById("connect").innerHTML === "Disconnect") {
         console.log('Get Moves');
     } else {
-        console.log('Connect first');
+        console.log('Connect First');
     }
 }
 
 function reset() {
     if (document.getElementById("connect").innerHTML === "Disconnect") {
-        console.log('Reset state');
+        console.log('Reset State');
     } else {
-        console.log('Connect first');
+        console.log('Connect First');
     }
 }
