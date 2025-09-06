@@ -1,94 +1,56 @@
-import { Cube } from 'https://cdn.jsdelivr.net/npm/cubejs@latest/dist/cube.min.js';
-
 let moves = [];
 
 function gm() {
     try {
-        const scramble = document.getElementById("scramble").value;
-        const solution = Cube.solve(scramble);
-        document.getElementById("solution").innerText = solution;
-        navigator.clipboard.writeText(solution);
-        console.log("Scramble:", scramble);
-        console.log("Solution:", solution);
-    } catch (err) {
-        console.error("Erreur solve:", err);
-    }
-}
-
-// Gestion des logs de l'iframe
-document.getElementById('cube-view').onload = function () {
-    const iframeWindow = document.getElementById('cube-view').contentWindow;
-
-    // Fake prompt pour la MAC address
-    const mac = 'AB:12:34:60:7E:DA';
-    iframeWindow.prompt = function (...args) {
-        console.log("Prompt intercepté:", args);
-        return mac;
-    };
-
-    if (iframeWindow) {
-        const logs = [];
-        iframeWindow.console.log = function (...args) {
-            logs.push(args);
-            if (args[1] !== undefined) {
-                if (args[1].type === "MOVE") {
-                    const move = args[1].move;
-                    console.log("Move détecté:", move);
-                    moves.push(move);
-                }
-            } else if (args == "Reset state") {
-                moves.length = 0;
-                console.log("Reset state");
-            }
-        };
-
-        // optionnel : exposer les logs
-        window.getIframeLogs = () => logs;
-    }
-};
-
-// --- Auto-refresh si solve.js est modifié ---
-function checkFileContent(filePath, specificContent, callbackIfContentNotSameFalse) {
-    fetch(filePath)
-        .then(r => r.text())
-        .then(data => {
-            if (data !== specificContent && data.search('Repl') === -1) {
-                callbackIfContentNotSameFalse();
-            }
-        })
-        .catch(err => console.error('Error:', err));
-}
-
-function betterFetch(url, callback) {
-    fetch(url)
-        .then(r => r.text())
-        .then(data => callback(data))
-        .catch(err => console.error('Error:', err));
-}
-
-function needUpdateMessage() {
-    document.getElementById('update').classList.add('update');
-    document.getElementById('update').innerText = 'New update detected ! Refreshing Page...';
-    setTimeout(() => checkOnlineStatus(() => location.reload()), 2000);
-}
-
-function checkOnlineStatus(callback) {
-    if (navigator.onLine) {
-        callback();
-    } else {
-        document.getElementById('update').innerText =
-            'New update detected waiting for internet connection...';
-        setTimeout(checkOnlineStatus, 5000);
-    }
-}
-
-betterFetch('solve.js', (data) => {
-    window.data1 = data;
-    setInterval(() => {
-        checkFileContent('solve.js', window.data1, () => {
-            if (navigator.onLine) {
-                needUpdateMessage();
+        if (typeof Rubik === 'undefined') {
+            throw new Error("Rubik library not loaded!");
+        }
+        const cube = new Rubik();
+        moves.forEach(move => {
+            if (cube[move]) {
+                cube[move]();
+            } else {
+                console.warn("Unknown move:", move);
             }
         });
-    }, 5000);
+        const solution = cube.solve();
+        document.getElementById("solution").textContent = solution;
+        navigator.clipboard.writeText(solution)
+            .then(() => console.log("Solution copied to clipboard!"))
+            .catch(err => console.warn("Copy failed:", err));
+        console.log("Solution:", solution);
+    } catch (err) {
+        console.error("Error:", err);
+        alert("Error: " + err.message);
+    }
+}
+
+window.addEventListener('message', function (event) {
+    if (event.data.type === "MOVE") {
+        moves.push(event.data.move);
+        console.log("Move detected:", event.data.move);
+    } else if (event.data === "Reset state") {
+        moves = [];
+        console.log("Reset state");
+    } else if (event.data.type === "Get Moves") {
+        gm();
+        console.log("Got Moves")
+    }
 });
+
+let lastFileContent = '';
+function checkForUpdates() {
+    fetch('solve.js')
+        .then(r => r.text())
+        .then(data => {
+            if (data !== lastFileContent && data.search('Repl') === -1) {
+                lastFileContent = data;
+                if (navigator.onLine) {
+                    document.getElementById('update').textContent =
+                        'Update detected! Refreshing in 2 seconds...';
+                    setTimeout(() => location.reload(), 2000);
+                }
+            }
+        })
+        .catch(console.error);
+}
