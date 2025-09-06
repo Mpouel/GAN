@@ -1,14 +1,11 @@
-console.log = function (...args) {
-    if (false) {
-        const facelets = args[1].facelets;
-        console.log(facelets);
+function gm() {
+    if (document.getElementById("connect").innerHTML === "Disconnect") {
+        console.log('Get Moves');
     }
 }
 
-function gm() {
-    console.log('Get Moves');
-}
-
 function reset() {
-    console.log('Reset state')
+    if (document.getElementById("connect").innerHTML === "Disconnect") {
+        console.log('Reset state');
+    }
 }
