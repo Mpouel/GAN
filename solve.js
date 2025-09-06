@@ -2,11 +2,16 @@ let moves = [];
 
 let cubejs = window.cubejs
 
-function solve(scramble) {
-  cubejs.initSolver();
-  const cube = cubejs();
-  cube.move(scramble.join(" "));
-  return cube.solve();
+async function solve(scramble) {
+  const response = await fetch('https://cube.crider.co.uk/api.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: `scramble=${encodeURIComponent(scramble)}&type=solution`
+  });
+  const solution = await response.text();
+  return solution;
 }
 
 function gm() {
