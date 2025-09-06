@@ -2,7 +2,11 @@ let moves = [];
 
 function gm() {
     try {
-        const solution = solve(moves);
+        const cub = new Cube()
+        moves.forEach((move) => {
+            cub.move(move)
+        })
+        const solution = cub.solve();
         navigator.clipboard.writeText(solution);
         console.log("Got moves:\n" + solution);
     } catch (err) {
