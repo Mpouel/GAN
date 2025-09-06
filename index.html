@@ -1,28 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAN Cube viewer</title>
+    <title>GAN Cube Viewer</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <iframe src="gan/" frameborder="0" class="cube-view" id="cube-view" allow="bluetooth"></iframe>
-    <button id="getmoves" onclick="gm()">Get moves</button>
+    <button id="getmoves" onclick="gm()">Get Moves</button>
     <pre id="solution"></pre>
-    <script src="https://cdn.jsdelivr.net/npm/cubejs/lib/cube.min.js"></script>
+    <p id="update"></p>
+    <script src="https://cdn.jsdelivr.net/npm/rubikjs@latest/dist/rubik.min.js"></script>
     <script>
         let moves = [];
+
+        // Listen for messages from the iframe
+        window.addEventListener('message', function(event) {
+            if (event.data.type === "MOVE") {
+                moves.push(event.data.move);
+                console.log("Move detected:", event.data.move);
+            } else if (event.data === "Reset state") {
+                moves.length = 0;
+                console.log("Reset state");
+            }
+        });
+
         function gm() {
             try {
-                if (typeof Cube === 'undefined') {
-                    throw new Error("Cube library not loaded!");
+                if (typeof Rubik === 'undefined') {
+                    throw new Error("Rubik library not loaded!");
                 }
-                const cub = new Cube();
-                moves.forEach(move => cub.move(move));
-                const solution = cub.solve();
+                const cube = new Rubik();
+                moves.forEach(move => cube[move]());
+                const solution = cube.solve();
                 document.getElementById("solution").textContent = solution;
                 navigator.clipboard.writeText(solution)
                     .catch(err => alert("Copy failed. Solution: " + solution));
@@ -32,20 +43,6 @@
                 alert("Error: " + err.message);
             }
         }
-
-        // Handle iframe logs (if you must)
-        document.getElementById('cube-view').onload = function () {
-            const iframeWindow = this.contentWindow;
-            iframeWindow.console.log = function (...args) {
-                if (args[1]?.type === "MOVE") {
-                    moves.push(args[1].move);
-                    console.log("Move detected:", args[1].move);
-                } else if (args[0] === "Reset state") {
-                    moves.length = 0;
-                    console.log("Reset state");
-                }
-            };
-        };
 
         // Auto-refresh logic (simplified)
         let lastFileContent = '';
@@ -67,5 +64,4 @@
         setInterval(checkForUpdates, 30000); // Check every 30 seconds
     </script>
 </body>
-
 </html>
