@@ -1,25 +1,28 @@
 let moves = [];
 
 async function solve(scramble) {
-  const response = await fetch('https://cube.crider.co.uk/api.php', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: `scramble=${encodeURIComponent(scramble)}&type=solution`
-  });
-  const solution = await response.text();
-  return solution;
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const apiUrl = 'https://cube.crider.co.uk/api.php';
+    const response = await fetch(proxyUrl + apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Origin': 'https://robotganev3.netlify.app',
+        },
+        body: `scramble=${encodeURIComponent(scramble)}&type=solution`
+    });
+    const solution = await response.text();
+    return solution;
 }
 
 function gm() {
-  try {
-    const solution = solve(moves);
-    navigator.clipboard.writeText(solution);
-    console.log("Got moves:\n" + solution);
-  } catch (err) {
-    console.error(err);
-  }
+    try {
+        const solution = solve(moves);
+        navigator.clipboard.writeText(solution);
+        console.log("Got moves:\n" + solution);
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 // Gestion des logs de l'iframe
@@ -84,7 +87,7 @@ function checkOnlineStatus(callback) {
         callback();
     } else {
         document.getElementById('update').innerText =
-          'New update detected waiting for internet connection...';
+            'New update detected waiting for internet connection...';
         setTimeout(checkOnlineStatus, 5000);
     }
 }
