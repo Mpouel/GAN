@@ -13,99 +13,25 @@
     <iframe src="gan/" frameborder="0" class="cube-view" id="cube-view" allow="bluetooth"></iframe>
     <button id="getMoves" onclick="gm()">Get moves</button>
     <div id="update"></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/kociemba@1.0.0></script>
+    <script src="https://cdn.jsdelivr.net/npm/cubejs/lib/cube.min.js"></script>
     <script>
-        let moves = [];
+        function solveScramble(scrambleMoves) {
+            const scramble = scrambleMoves.join(" ");
+            Cube.initSolver(); // init le solveur
+            const cube = new Cube();
+            cube.move(scramble); // applique ton scramble
+            return cube.solve(); // renvoie la solution
+        }
 
         function gm() {
             try {
-                const solution = kociemba.solve(moves);
+                const solution = solveScramble(moves);
                 navigator.clipboard.writeText(solution);
                 console.log("Got moves:\n" + solution);
             } catch (err) {
                 console.error(err);
             }
         }
-
-        // Gestion des logs de l'iframe
-        document.getElementById('cube-view').onload = function () {
-            const iframeWindow = document.getElementById('cube-view').contentWindow;
-
-            // Fake prompt pour la MAC address
-            const mac = 'AB:12:34:60:7E:DA';
-            iframeWindow.prompt = function (...args) {
-                console.log("Prompt intercepté:", args);
-                return mac;
-            };
-
-            if (iframeWindow) {
-                const logs = [];
-                iframeWindow.console.log = function (...args) {
-                    logs.push(args);
-                    if (args[1] !== undefined) {
-                        if (args[1].type === "MOVE") {
-                            const move = args[1].move;
-                            console.log("Move détecté:", move);
-                            moves.push(move);
-                        }
-                    } else if (args == "Reset state") {
-                        moves.length = 0;
-                        console.log("Reset state");
-                    }
-                };
-
-                // optionnel : exposer les logs
-                window.getIframeLogs = () => logs;
-            }
-        };
-
-        // --- Auto-refresh si solve.js est modifié ---
-        function checkFileContent(filePath, specificContent, callbackIfContentNotSameFalse) {
-            fetch(filePath)
-                .then(r => r.text())
-                .then(data => {
-                    if (data !== specificContent && data.search('Repl') === -1) {
-                        callbackIfContentNotSameFalse();
-                    }
-                })
-                .catch(err => console.error('Error:', err));
-        }
-
-        function betterFetch(url, callback) {
-            fetch(url)
-                .then(r => r.text())
-                .then(data => callback(data))
-                .catch(err => console.error('Error:', err));
-        }
-
-        function needUpdateMessage() {
-            document.getElementById('update').classList.add('update');
-            document.getElementById('update').innerText = 'New update detected ! Refreshing Page...';
-            setTimeout(() => checkOnlineStatus(() => location.reload()), 2000);
-        }
-
-        function checkOnlineStatus(callback) {
-            if (navigator.onLine) {
-                callback();
-            } else {
-                document.getElementById('update').innerText =
-                    'New update detected waiting for internet connection...';
-                setTimeout(checkOnlineStatus, 5000);
-            }
-        }
-
-        betterFetch('solve.js', (data) => {
-            window.data1 = data;
-            setInterval(() => {
-                checkFileContent('solve.js', window.data1, () => {
-                    if (navigator.onLine) {
-                        needUpdateMessage();
-                    }
-                });
-            }, 5000);
-        });
-
     </script>
 </body>
 

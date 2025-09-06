@@ -2,7 +2,7 @@ let moves = [];
 
 function gm() {
     try {
-        const solution = kociemba.solve(moves);
+        const solution = solve(moves);
         navigator.clipboard.writeText(solution);
         console.log("Got moves:\n" + solution);
     } catch (err) {
