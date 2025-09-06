@@ -1,4 +1,4 @@
-import cubejs from "cubejs";
+import cubejs from "https://esm.sh/cubejs@4.0.0";
 
 let moves = [];
 
