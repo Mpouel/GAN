@@ -1,17 +1,16 @@
 import cubejs from "cubejs";
 
-cubejs.initSolver();
-
 let moves = [];
 
 async function solve(scramble) {
+    cubejs.initSolver();
     const cube = cubejs();
     cube.move(scramble);
     const solution = cube.solve(); 
     return solution || "caca";
 }
 
-function getMoves() {
+function gm() {
     try {
         const solution = solve(moves);
         navigator.clipboard.writeText(solution)
