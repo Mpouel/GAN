@@ -38,7 +38,7 @@ html body {
     right: 0px;
 }
 
-#getMoves {
+#getmoves {
     position: fixed;
     top: 62vh;
     left: calc(50vw - 20px);
