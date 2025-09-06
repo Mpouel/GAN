@@ -34,7 +34,9 @@ window.addEventListener('message', function (event) {
         console.log("Reset state");
     } else if (event.data.type === "Get Moves") {
         gm();
-        console.log("Got Moves")
+        console.log("Got Moves");
+    } else if (event.data === "Connect First") {
+        console.log("Connect first");
     }
 });
 
