@@ -1,26 +1,20 @@
-/* global cubejs */   // dit au bundler/navigateur que cubejs est une variable globale
-
 let moves = [];
 
-// Fonction de résolution
 function solve(scramble) {
-    cubejs.initSolver();
-    const cube = cubejs();
-    cube.move(scramble.join(" "));
-    const solution = cube.solve();
-    return solution || "Erreur: impossible de résoudre";
+  cubejs.initSolver();
+  const cube = cubejs();
+  cube.move(scramble.join(" "));
+  return cube.solve();
 }
 
-// Fonction appelée par le bouton
 function gm() {
-    try {
-        const solution = solve(moves);
-        navigator.clipboard.writeText(solution)
-            .then(() => console.log("Solution copiée dans le presse-papier !"));
-        console.log("Got moves: \n" + solution);
-    } catch (err) {
-        console.error(err);
-    }
+  try {
+    const solution = solve(moves);
+    navigator.clipboard.writeText(solution);
+    console.log("Got moves:\n" + solution);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 // Gestion des logs de l'iframe

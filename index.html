@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAN Cube viewer</title>
-    <link rel="stylesheet" href="style.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GAN Cube viewer</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
-    <iframe src="gan/" frameborder="0" class="cube-view" id="cube-view" allow="bluetooth"></iframe>
-    <button id="getMoves" onclick="gm()">Get moves</button>
-    <div id="update"></div>
-    <script src="https://cdn.jsdelivr.net/npm/cubejs/lib/cube.min.js"></script>
-    <script src="solve.js"></script>
+  <iframe src="gan/" frameborder="0" class="cube-view" id="cube-view" allow="bluetooth"></iframe>
+  <button id="getMoves" onclick="gm()">Get moves</button>
+  <div id="update"></div>
+
+  <!-- Charger cubejs EN PREMIER -->
+  <script src="https://cdn.jsdelivr.net/npm/cubejs/lib/cube.min.js"></script>
+  <!-- Ton script ensuite -->
+  <script src="solve.js"></script>
 </body>
 </html>
