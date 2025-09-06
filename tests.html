@@ -1,149 +1,35 @@
-<!doctype html>
-<html lang="fr">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>GAN Cube viewer — fixed</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding:16px; }
-    .controls { margin:12px 0; }
-    pre { background:#f6f6f6; padding:8px; border:1px solid #ddd; min-height:28px; }
-    button { margin-right:8px; padding:6px 10px; }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CubeJS Solver Demo</title>
 </head>
 <body>
-  <iframe id="cube-view" src="gan/" frameborder="0" style="width:100%;height:320px" allow="bluetooth"></iframe>
+  <h1>CubeJS Solver Demo</h1>
 
-  <div class="controls">
-    <button id="solveBtn">Get moves & solve</button>
-    <button id="clearBtn">Clear moves</button>
-  </div>
+  <label>Scramble:</label>
+  <input id="scramble" value="R U R' U'">
+  <button onclick="solveCube()">Solve</button>
 
-  <label>Captured moves:</label>
-  <pre id="movesOut"></pre>
-
-  <label>Solution (copied to clipboard when available):</label>
+  <h2>Solution:</h2>
   <pre id="solution"></pre>
 
-  <!-- IMPORTANT: load cubejs WITHOUT type="module" so it defines global `cubejs` -->
-  <script src="https://cdn.jsdelivr.net/npm/cubejs/lib/cube.min.js"></script>
-
+  <!-- ✅ Charger cubejs (UMD) -->
+  <script src="https://unpkg.com/cubejs/lib/cube.min.js"></script>
   <script>
-  (function () {
-    const iframe = document.getElementById('cube-view');
-    const movesOut = document.getElementById('movesOut');
-    const solutionOut = document.getElementById('solution');
-    const solveBtn = document.getElementById('solveBtn');
-    const clearBtn = document.getElementById('clearBtn');
-
-    let moves = [];
-
-    function updateUI() {
-      movesOut.textContent = moves.join(' ');
-    }
-
-    function pushMove(move) {
-      if (!move || typeof move !== 'string') return;
-      // normalize smart quotes -> ascii apostrophe
-      move = move.replace(/’/g, "'");
-      // trim and keep only allowed tokens (like R, R', R2, U, U', ...)
-      const token = move.trim();
-      if (!token) return;
-      // avoid immediate duplicate pushes
-      if (moves.length === 0 || moves[moves.length - 1] !== token) {
-        moves.push(token);
-        updateUI();
+    function solveCube() {
+      try {
+        const scramble = document.getElementById("scramble").value.trim();
+        const solution = cubejs.solve(scramble); // ✅ fonctionne avec UMD
+        document.getElementById("solution").textContent = solution;
+        navigator.clipboard.writeText(solution);
+        console.log("Scramble:", scramble);
+        console.log("Solution:", solution);
+      } catch (err) {
+        console.error("Erreur:", err);
       }
     }
-
-    // solve action exposed globally for debug if needed
-    window.gm = function gm() {
-      if (moves.length === 0) {
-        solutionOut.textContent = 'No moves captured.';
-        return;
-      }
-      if (typeof cubejs === 'undefined') {
-        solutionOut.textContent = 'cubejs not loaded. Check <script> include (no type="module").';
-        console.error('cubejs not loaded');
-        return;
-      }
-
-      try {
-        const scramble = moves.join(' ');
-        const solution = cubejs.solve(scramble);
-        solutionOut.textContent = solution || '(no solution returned)';
-        // try write to clipboard, ignore if unavailable
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(solution).catch(()=>{/*ignore*/});
-        }
-      } catch (err) {
-        solutionOut.textContent = 'Error: ' + (err && err.message ? err.message : String(err));
-        console.error(err);
-      }
-    };
-
-    // UI buttons
-    solveBtn.addEventListener('click', gm);
-    clearBtn.addEventListener('click', () => {
-      moves.length = 0;
-      updateUI();
-      solutionOut.textContent = '';
-    });
-
-    // Attach to iframe when it loads. Must be same-origin to access contentWindow.
-    iframe.addEventListener('load', () => {
-      let w;
-      try {
-        w = iframe.contentWindow;
-        if (!w) throw new Error('no contentWindow');
-      } catch (err) {
-        console.error('Cannot access iframe; likely cross-origin. Serve iframe from the same origin.', err);
-        solutionOut.textContent = 'Cannot access iframe (cross-origin). Serve page and /gan/ from same origin to intercept moves.';
-        return;
-      }
-
-      // Safe: attempt to override prompt in iframe (used by the cube UI)
-      try {
-        const mac = 'AB:12:34:60:7E:DA';
-        w.prompt = function (...args) { console.log('Prompt intercepted in parent:', args); return mac; };
-      } catch (e) {
-        console.warn('Could not override iframe prompt', e);
-      }
-
-      // Intercept console.log inside iframe while preserving original behaviour
-      try {
-        const origLog = w.console && w.console.log ? w.console.log.bind(w.console) : null;
-        w.console.log = function (...args) {
-          if (origLog) try { origLog(...args); } catch(e){/*ignore*/}
-
-          // expected patterns:
-          // 1) args[1] is { type: "MOVE", move: "R" }
-          if (args[1] && typeof args[1] === 'object' && args[1].type === 'MOVE' && args[1].move) {
-            pushMove(String(args[1].move));
-            return;
-          }
-          // 2) args[0] is the object
-          if (args[0] && typeof args[0] === 'object' && args[0].type === 'MOVE' && args[0].move) {
-            pushMove(String(args[0].move));
-            return;
-          }
-          // 3) plain string that contains tokens like "R", "R'", "R2"
-          if (typeof args[0] === 'string') {
-            // quick token match: R, R', R2, U, U', U2, F, etc.
-            const tokens = args[0].match(/\b([URFDLBMESurfdlbxyz]{1}2?'?)\b/g);
-            if (tokens) tokens.forEach(t => pushMove(t));
-            // "Reset state" handling
-            if (args[0] === 'Reset state') {
-              moves.length = 0;
-              updateUI();
-            }
-          }
-        };
-      } catch (e) {
-        console.warn('Could not override iframe console.log (security/cross-origin).', e);
-      }
-    });
-  })();
   </script>
 </body>
 </html>
