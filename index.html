@@ -7,12 +7,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <h1>GAN Cube Viewer</h1>
     <iframe src="gan/" frameborder="0" class="cube-view" id="cube-view" allow="bluetooth"></iframe>
-    <button id="getmoves" onclick="gm()">Get Moves</button>
-    <pre id="solution"></pre>
+    <div>
+        <button id="getmoves" onclick="gm()">Get Moves</button>
+    </div>
+    <h3>Solution:</h3>
+    <pre id="solution">Moves will appear here.</pre>
     <p id="update"></p>
+
+    <!-- Load rubikjs library -->
     <script src="https://cdn.jsdelivr.net/npm/rubikjs@latest/dist/rubik.min.js"></script>
     <script>
+        // Array to store moves
         let moves = [];
 
         // Listen for messages from the iframe
@@ -21,22 +28,31 @@
                 moves.push(event.data.move);
                 console.log("Move detected:", event.data.move);
             } else if (event.data === "Reset state") {
-                moves.length = 0;
+                moves = [];
                 console.log("Reset state");
+                document.getElementById("solution").textContent = "Moves will appear here.";
             }
         });
 
+        // Function to get and display the solution
         function gm() {
             try {
                 if (typeof Rubik === 'undefined') {
                     throw new Error("Rubik library not loaded!");
                 }
                 const cube = new Rubik();
-                moves.forEach(move => cube[move]());
+                moves.forEach(move => {
+                    if (cube[move]) {
+                        cube[move]();
+                    } else {
+                        console.warn("Unknown move:", move);
+                    }
+                });
                 const solution = cube.solve();
                 document.getElementById("solution").textContent = solution;
                 navigator.clipboard.writeText(solution)
-                    .catch(err => alert("Copy failed. Solution: " + solution));
+                    .then(() => console.log("Solution copied to clipboard!"))
+                    .catch(err => console.warn("Copy failed:", err));
                 console.log("Solution:", solution);
             } catch (err) {
                 console.error("Error:", err);
@@ -44,7 +60,7 @@
             }
         }
 
-        // Auto-refresh logic (simplified)
+        // Optional: Auto-refresh logic (simplified)
         let lastFileContent = '';
         function checkForUpdates() {
             fetch('solve.js')
@@ -54,14 +70,15 @@
                         lastFileContent = data;
                         if (navigator.onLine) {
                             document.getElementById('update').textContent =
-                                'Update detected! Refreshing...';
+                                'Update detected! Refreshing in 2 seconds...';
                             setTimeout(() => location.reload(), 2000);
                         }
                     }
                 })
                 .catch(console.error);
         }
-        setInterval(checkForUpdates, 30000); // Check every 30 seconds
+        // Uncomment to enable auto-refresh
+        // setInterval(checkForUpdates, 30000);
     </script>
 </body>
 </html>
