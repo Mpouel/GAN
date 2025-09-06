@@ -44,14 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Attach the gm function to the button
-    const getMovesButton = document.getElementById("getmoves");
-    if (getMovesButton) {
-        getMovesButton.addEventListener("click", gm);
-    } else {
-        console.error("Button with ID 'getmoves' not found!");
-    }
-
     // Optional: Auto-refresh logic
     let lastFileContent = '';
     function checkForUpdates() {
