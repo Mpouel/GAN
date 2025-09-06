@@ -38,25 +38,8 @@ html body {
     right: 0px;
 }
 
-#mac {
-    display:none;
-}
-
-#titanic {
-    float: none;
-}
-
-#clr-n {
-    width: 100px;
-    height: 100px;
-}
-#clr-m {
-    width: 100px;
-    height: 100px;
-    background: black;
-}
-#lol {
+#getMoves {
     position: fixed;
-    top: 600px;
-    left: 300px;
+    top: 62vh;
+    left: calc(50vw - 20px);
 }
