@@ -1,16 +1,17 @@
+import { Cube } from 'https://cdn.jsdelivr.net/npm/cubejs@latest/dist/cube.min.js';
+
 let moves = [];
 
 function gm() {
     try {
-        const cub = new Cube()
-        moves.forEach((move) => {
-            cub.move(move)
-        })
-        const solution = cub.solve();
+        const scramble = document.getElementById("scramble").value;
+        const solution = Cube.solve(scramble);
+        document.getElementById("solution").innerText = solution;
         navigator.clipboard.writeText(solution);
-        console.log("Got moves:\n" + solution);
+        console.log("Scramble:", scramble);
+        console.log("Solution:", solution);
     } catch (err) {
-        console.error(err);
+        console.error("Erreur solve:", err);
     }
 }
 
